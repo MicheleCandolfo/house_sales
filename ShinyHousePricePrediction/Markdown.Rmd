@@ -1,0 +1,38 @@
+---
+title: "HousePriceMarkdown"
+author: "PK"
+date: "10/22/2021"
+output: html_document
+---
+
+## Import Dataset
+```{r setup, include=TRUE}
+dataframe <- read.csv("kc_house_data.csv")
+#View(dataframe)
+names(dataframe)
+```
+## First Plot
+```{r}
+plot(dataframe$price,dataframe$floors)
+```
+
+## Second Plot (qplot)
+```{r}
+library("ggplot2")
+require("ggplot2")
+qplot(dataframe$price,dataframe$waterfront)
+```
+
+## Third Plot
+```{r}
+thirdP <- ggplot(mapping = aes(x=dataframe$price,
+                               y=dataframe$condition,
+                               color=dataframe$price,
+                               fill=dataframe$price))
+thirdP+geom_jitter(width=1.0,size=4,alpha=0.6)
+thirdP+geom_boxplot()
+```
+
+
+
+
