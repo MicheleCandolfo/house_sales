@@ -16,7 +16,7 @@ library("ggplot2")
 library("dplyr")
 ```
 
-## Daten einlesen :-)
+## Daten einlesen
 Dataset von Kaggle einlesen und ausgeben. 
 
 ```{r dataset}
