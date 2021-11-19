@@ -5,11 +5,12 @@ install.load::install_load(c("shiny",
                              "corrplot",
                              "ggplot2",
                              "dplyr",
-                             "shinydashboard"))
+                             "shinydashboard",
+                             "shinydashboardPlus"))
 
 house_prices <- read.csv("kc_house_data.csv")
 
-ui <- dashboardPage(skin = "blue",
+ui <- dashboardPage(skin = "midnight",
                     dashboardHeader(title = "House Price Predicition"),
                     dashboardSidebar(collapsed = TRUE,
                                      sidebarMenu(
