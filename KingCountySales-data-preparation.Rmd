@@ -8,7 +8,6 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-#Ich bin ein Test von Lele
 
 
 #Packages installieren 
@@ -187,7 +186,7 @@ ggplot(house_prices4,aes(x=sqft_living,y=price))+
 
 #Ausreisser entfernen 
 dim(house_prices4)
-house_prices4 = subset(house_prices4,!(house_prices4$sqft_living > 8500))
+house_prices4 = subset(house_prices4,!(house_prices4$sqft_living > 10000))
 dim(house_prices4)
 ```
 ## Sqft_lot Korrelation: 0.089881781 --> unbedeutend
@@ -435,4 +434,10 @@ addCircleMarkers(col = ~pal(price), opacity = 1.1, radius = 0.3) %>%
 addLegend(pal = pal, values = ~price) 
 
 int_map
+```
+
+```{r sqft_quadratmeter}
+house_prices4$squareMeter <- round(house_prices4$sqft_living *0.092903)
+head(house_prices4)
+
 ```
