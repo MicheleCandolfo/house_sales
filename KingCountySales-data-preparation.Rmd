@@ -16,10 +16,12 @@ install.packages("dplyr")
 install.packages("ggplot2")
 install.packages("corrplot")
 install.packages("leaflet")
+install.packages("caTools")
 library("leaflet")
 library("corrplot")
 library("ggplot2")
 library("dplyr")
+library("caTools")
 ```
 
 #Daten einlesen und ausgeben --> Überblick verschaffen
@@ -114,8 +116,8 @@ house_prices3$condition <- as.factor(house_prices3$condition)
 house_prices3$zipcode <- as.factor(house_prices3$zipcode)
 
 #Hinzufügen von zwei Spalten (boolean) (basement und renovated)
-house_prices3$basement <- as.factor(ifelse(house_prices3$sqft_basement>0,1,0))
-house_prices3$renovated <- as.factor(ifelse(house_prices3$yr_renovated>0,1,0))
+house_prices3$basement <- (ifelse(house_prices3$sqft_basement>0,1,0))
+house_prices3$renovated <- (ifelse(house_prices3$yr_renovated>0,1,0))
 house_prices3
 ```
 ##Visualisierung der numerischen Variablen 
@@ -455,5 +457,35 @@ house_prices4$sqm_basement <- round(house_prices4$sqft_basement *qm)
 house_prices4[,c("sqft_living","sqft_lot","sqft_above","sqft_basement","sqft_lot15","sqft_living15")] <- list(NULL)
 head(house_prices4)
 
+
+```
+
+```{r model training }
+
+#Choosing features
+house_prices5=house_prices4[,c("price","bedrooms","bathrooms","floors","waterfront","view","grade","condition","yr_built", "zipcode", "sqm_living", "sqm_lot", "sqm_lot15", "sqm_living15", "basement", "renovated")]
+
+colnames(house_prices5)
+
+
+#Splitting the data on train and test
+
+set.seed(5) 
+sample <- sample.split(house_prices4, SplitRatio = .80)
+train <- subset(house_prices5, sample == TRUE)
+test  <- subset(house_prices5, sample == FALSE)
+
+#Making the model
+
+model=lm(price ~., data = train)
+summary(model)
+
+#Looking the head values from Actual and Predicted
+
+'distPred=predict(model, test)
+
+actuals_preds <- data.frame(cbind(actuals=price, predicteds=distPred))
+
+head(actuals_preds)'
 
 ```
