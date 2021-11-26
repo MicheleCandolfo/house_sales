@@ -96,7 +96,8 @@ View(df3)
 a <- df3[1, 2]
 b <- df3[1, 3]
 c <- a / b 
-c * 0.092903
+qm <- 0.092903
+c * qm
 # -->33 is not a plausible amount of bedrooms because the bedroom itself has only around 5 square meters, we will change it to 3
 
 #Create a copy of house_prices, change bedroom value from 33 to 3,# Eliminate all the data which has bedrooms or bathrooms = 0
@@ -437,7 +438,22 @@ int_map
 ```
 
 ```{r sqft_quadratmeter}
-house_prices4$squareMeter <- round(house_prices4$sqft_living *0.092903)
+#sqft --> sqm
+house_prices4$sqm_living <- round(house_prices4$sqft_living *qm)
+
+house_prices4$sqm_lot <- round(house_prices4$sqft_lot *qm)
+
+house_prices4$sqm_lot15 <- round(house_prices4$sqft_lot15 *qm)
+
+house_prices4$sqm_living15 <- round(house_prices4$sqft_living15 *qm)
+
+house_prices4$sqm_above <- round(house_prices4$sqft_above *qm)
+
+house_prices4$sqm_basement <- round(house_prices4$sqft_basement *qm)
+
+#drop sqft columns
+house_prices4[,c("sqft_living","sqft_lot","sqft_above","sqft_basement","sqft_lot15","sqft_living15")] <- list(NULL)
 head(house_prices4)
+
 
 ```
