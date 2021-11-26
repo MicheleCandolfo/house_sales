@@ -38,7 +38,25 @@ ui <- dashboardPage(skin = "midnight",
                         ),
                         # Second tab content
                         tabItem(tabName = "Dashboard",
-                                h2("Widgets tab content")
+                                h2("Welcome to the dashboard"),
+                                
+                                valueBox(10 * 2, "Example", icon = icon("credit-card"), color = "green"),
+                                valueBox(10 * 4, "Example", icon = icon("list"), color = "purple"),
+                                valueBox(10 * 6, "Example", icon = icon("thumbs-up"), color = "red"),
+                                
+                                box(
+                                  title = "Histogram", status = "primary", solidHeader = TRUE,
+                                  collapsible = TRUE,
+                                  plotOutput("plot3", height = 250)
+                                ),
+                                
+                                box(
+                                  title = "Inputs", status = "warning", solidHeader = TRUE,
+                                  "Box content here", br(), "More box content",
+                                  sliderInput("slider", "Slider input:", 1, 100, 50),
+                                  textInput("text", "Text input:")
+                                )
+                                
                         ),
                         
                         # Third tab content
