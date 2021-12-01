@@ -23,16 +23,34 @@ ui <- dashboardPage(skin = "midnight",
                                      
                                      
                     ),
-                    dashboardBody(
+                    dashboardBody(tags$head(
+                      # Include the custom styling
+                      tags$link(rel = "stylesheet", type = "text/css", href = "style.css")
+                      ),
+                      # Add the pages
                       tabItems(
                         # First tab content
-                        tabItem(tabName = "Home",
-                                div(
-                                  id = 'myDiv', class = 'simpleDiv',
-                                  img(src = "/house.jpg", height = "100%", width = "100%"
-                                      
-                                  )
-                                )
+                        tabItem(tabName = "Home", style = "border: none;",
+                                
+                                img(src = "/house.jpg", 
+                                    style = "height: auto; width: 100%; border: none; border-radius: 5px;", 
+                                      ),
+                                
+                                actionButton("do", "Get your predicition", 
+                                    style = "position: absolute;
+                                              top: 50%;
+                                              left: 50%;
+                                              transform: translate(-50%, -50%);
+                                              -ms-transform: translate(-50%, -50%);
+                                              background-color: #000080;
+                                              color: white;
+                                              font-size: 16px;
+                                              padding: 12px 24px;
+                                              border: none;
+                                              cursor: pointer;
+                                              border-radius: 5px;")
+                                
+                                  
                                 
                                 
                         ),
