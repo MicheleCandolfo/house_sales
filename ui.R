@@ -8,8 +8,6 @@ install.load::install_load(c("shiny",
                              "shinydashboard",
                              "shinydashboardPlus"))
 
-###### nur ein Test :-)
-
 ui <- dashboardPage(skin = "midnight",
                     dashboardHeader(title = tagList(
                       span(class = "logo-lg", "KC House Prices"), 
@@ -23,8 +21,6 @@ ui <- dashboardPage(skin = "midnight",
                                        menuItem("Map", tabName = "Map", icon = icon("globe-americas")),
                                        menuItem("Information", tabName = "Information", icon = icon("info-circle"))
                                      )
-                                     
-                                     
                     ),
                     dashboardBody(tags$head(
                       # Include the custom styling
@@ -94,8 +90,6 @@ ui <- dashboardPage(skin = "midnight",
                                   numericInput("sqm_ab", label = h3("sqm_above"), value = 0),
                                   checkboxGroupInput("sonstiges", label = h3("Sonstiges"), 
                                                      choices = list("Waterfront" = 1, "basement" = 2))
-                                                     
-                        
                                 )
                         ),
                         # Fourth tab content
@@ -111,17 +105,23 @@ ui <- dashboardPage(skin = "midnight",
                                   leafletOutput("int_map")
                                   
                                 )
-                                
-                                
                         ),
                         # Fifth tab content
                         tabItem(tabName = "Information",
-                                h2("Widgets tab content")
+                                div(
+                                  h1("About the project"),
+                                  br(),
+                                  h2("About the data set"),
+                                  h3("General Information"),
+                                  h3("Column description"),
+                                  br(),
+                                  h2("About the algorithm"),
+                                  br(),
+                                  h2("About data preparation"),
+                                  br(),
+                                  h2("About the team"))
+                                
                         )
-                        
                       )
-                      
-                      
-                      
                     )
 )
