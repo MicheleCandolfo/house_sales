@@ -109,11 +109,11 @@ house_prices3<-house_prices2[!(house_prices2$bedrooms==0 | house_prices2$bathroo
 
 ```
 ```{r kategorischeVariablen}
-house_prices3$floors <- as.factor(house_prices3$floors)
-house_prices3$waterfront <- as.factor(house_prices3$waterfront)
-house_prices3$grade <- as.factor(house_prices3$grade)
-house_prices3$condition <- as.factor(house_prices3$condition)
-house_prices3$zipcode <- as.factor(house_prices3$zipcode)
+#house_prices3$floors <- as.factor(house_prices3$floors)
+#house_prices3$waterfront <- as.factor(house_prices3$waterfront)
+#house_prices3$grade <- as.factor(house_prices3$grade)
+#house_prices3$condition <- as.factor(house_prices3$condition)
+#house_prices3$zipcode <- as.factor(house_prices3$zipcode)
 
 #Hinzufügen von zwei Spalten (boolean) (basement und renovated)
 house_prices3$basement <- (ifelse(house_prices3$sqft_basement>0,1,0))
@@ -427,8 +427,6 @@ ggplot(house_prices4, aes(x = renovated, y = price,fill=renovated)) +
 coordinates_data <- dplyr::select(house_prices4, price, lat, long)
 head(coordinates_data)
 
-
- 
 pal = colorNumeric("YlOrRd", domain = coordinates_data$price)
 int_map <- coordinates_data %>%
 leaflet()%>%
@@ -463,7 +461,7 @@ head(house_prices4)
 ```{r model training }
 
 #Choosing features
-house_prices5=house_prices4[,c("price","bedrooms","bathrooms","floors","waterfront","view","grade","condition","yr_built", "zipcode", "sqm_living", "sqm_lot", "sqm_lot15", "sqm_living15", "basement", "renovated")]
+house_prices5=house_prices4[,c("price","bedrooms","bathrooms","floors","waterfront","view","grade","condition","yr_built", "sqm_living","sqm_above", "basement","sqm_lot15", "sqm_living15" ,"lat", "long", "renovated")]
 
 colnames(house_prices5)
 
@@ -478,6 +476,7 @@ test  <- subset(house_prices5, sample == FALSE)
 #Making the model
 
 model=lm(price ~., data = train)
+
 summary(model)
 
 #Looking the head values from Actual and Predicted
@@ -487,5 +486,15 @@ summary(model)
 actuals_preds <- data.frame(cbind(actuals=price, predicteds=distPred))
 
 head(actuals_preds)'
+
+
+
+```
+```  {r test}
+house_for_lm <- train %>% select(-long)
+
+model2=lm(log(price) ~., data = house_for_lm)
+
+summary(model2)
 
 ```

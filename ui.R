@@ -8,7 +8,7 @@ install.load::install_load(c("shiny",
                              "shinydashboard",
                              "shinydashboardPlus"))
 
-house_prices <- read.csv("kc_house_data.csv")
+
 
 ui <- dashboardPage(skin = "midnight",
                     dashboardHeader(title = "House Price Predicition"),
@@ -79,7 +79,23 @@ ui <- dashboardPage(skin = "midnight",
                         
                         # Third tab content
                         tabItem(tabName = "Predicition",
-                                h2("Widgets tab content")
+                                h2("Widgets tab content"),
+                                
+                                box(
+                                  numericInput("bed", label = h3("Bedrooms"), value = 0),
+                                  numericInput("bath", label = h3("Bathrooms"), value = 0),
+                                  numericInput("floors", label = h3("Floors"), value = 0),
+                                  numericInput("view", label = h3("View"), value = 0),
+                                  numericInput("grade", label = h3("Grade"), value = 0),
+                                  numericInput("con", label = h3("Condition"), value = 0),
+                                  numericInput("yr_b", label = h3("Year built"), value = 0),
+                                  numericInput("sqm_liv", label = h3("sqm_living"), value = 0),
+                                  numericInput("sqm_ab", label = h3("sqm_above"), value = 0),
+                                  checkboxGroupInput("sonstiges", label = h3("Sonstiges"), 
+                                                     choices = list("Waterfront" = 1, "basement" = 2))
+                                                     
+                        
+                                )
                         ),
                         # Fourth tab content
                         tabItem(tabName = "Map",
