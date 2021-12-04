@@ -11,12 +11,15 @@ install.load::install_load(c("shiny",
 
 
 ui <- dashboardPage(skin = "midnight",
-                    dashboardHeader(title = "House Price Predicition"),
-                    dashboardSidebar(collapsed = TRUE,
+                    dashboardHeader(title = tagList(
+                      span(class = "logo-lg", "KC House Prices"), 
+                      img(src = "/logo.png",
+                          style = "height: auto; width: 180%"))),
+                      dashboardSidebar(collapsed = TRUE,
                                      sidebarMenu(
                                        menuItem("Home", tabName = "Home", icon = icon("home")),
                                        menuItem("Dashboard", tabName = "Dashboard", icon = icon("tachometer-alt")),
-                                       menuItem("Prediction", tabName = "Predicition", icon = icon("chart-line")),
+                                       menuItem("Prediction", tabName = "Prediction", icon = icon("chart-line")),
                                        menuItem("Map", tabName = "Map", icon = icon("globe-americas")),
                                        menuItem("Information", tabName = "Information", icon = icon("info-circle"))
                                      )
@@ -30,13 +33,13 @@ ui <- dashboardPage(skin = "midnight",
                       # Add the pages
                       tabItems(
                         # First tab content
-                        tabItem(tabName = "Home", style = "border: none;",
+                        tabItem(tabName = "Home", style = "border: none",
                                 
                                 img(src = "/house.jpg", 
-                                    style = "height: auto; width: 100%; border: none; border-radius: 5px;", 
+                                    style = "height: auto; width: 100%; border: none; border-radius: 5px", 
                                       ),
                                 
-                                actionButton("do", "Get your predicition", 
+                                actionButton("do", "Get your predicition",
                                     style = "position: absolute;
                                               top: 50%;
                                               left: 50%;
@@ -48,19 +51,17 @@ ui <- dashboardPage(skin = "midnight",
                                               padding: 12px 24px;
                                               border: none;
                                               cursor: pointer;
-                                              border-radius: 5px;")
-                                
-                                  
-                                
-                                
+                                              border-radius: 5px;"),
                         ),
                         # Second tab content
                         tabItem(tabName = "Dashboard",
                                 h2("Welcome to the dashboard"),
                                 
-                                valueBox(10 * 2, "Example", icon = icon("credit-card"), color = "green"),
-                                valueBox(10 * 4, "Example", icon = icon("list"), color = "purple"),
-                                valueBox(10 * 6, "Example", icon = icon("thumbs-up"), color = "red"),
+                                valueBox("Anzahl IDs", "House count", icon = icon("file-csv"), color = "green", width = 3),
+                                valueBox("$/QM", "$/QM", icon = icon("dollar-sign"), color = "green", width = 3),
+                                valueBox("MDP", "Med Price Dev", icon = icon("dollar-sign"), color = "green", width = 3),
+                                valueBox("MHP", "Med House Price", icon = icon("dollar-sign"), color = "green", width = 3),
+                                valueBox("MQM", "Med QM", icon = icon("square"), color = "green", width = 3),
                                 
                                 box(
                                   title = "Histogram", status = "primary", solidHeader = TRUE,

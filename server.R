@@ -1,5 +1,5 @@
 
-server <- function(input, output) {
+server <- function(input, output, session) {
   house_prices <- read.csv("kc_house_data.csv")
   
   #output$value <- renderPrint({ input$num })
@@ -15,5 +15,4 @@ server <- function(input, output) {
             addCircleMarkers(col = ~pal(price), opacity = 1.1, radius = 0.3) %>% 
             addLegend(pal = pal, values = ~price)
     })
-    
 }
