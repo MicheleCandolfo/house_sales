@@ -22,27 +22,59 @@ ui <- dashboardPage(skin = "midnight",
                                        menuItem("About", tabName = "About", icon = icon("info-circle"))
                                      )
                     ),
-                    dashboardBody(tags$head(
+                    #-----------------------------------------------------------------
+                    dashboardBody( style = "border: none",
+                      
+                      tags$head(
                       # Include the custom styling
                       tags$link(rel = "stylesheet", type = "text/css", href = "style.css")
                       ),
                       # Add the pages
+                      #-----------------------------------------------------------------
                       tabItems(
                         # First tab content
+                        #-----------------------------------------------------------------
                         tabItem(tabName = "Home", style = "border: none",
                                 
                                 img(src = "/images/house.jpg", 
                                     style = "height: auto; width: 100%; border: none; border-radius: 5px", 
                                       ),
                                 
-                                actionButton("do", "Get your predicition",
+                                actionButton('actionButton', 'Get your prediciton',
                                     style = "position: absolute;
-                                              top: 50%;
+                                              top: 48%;
                                               left: 50%;
                                               transform: translate(-50%, -50%);
                                               -ms-transform: translate(-50%, -50%);
-                                              background-color: #000080;
+                                              background-color: rgba(0, 191, 255,0.5);
                                               color: white;
+                                              font-size: 16px;
+                                              padding: 12px 24px;
+                                              border: none;
+                                              cursor: pointer;
+                                              border-radius: 5px;"),
+                                
+                                h2("You like to know how much your real estate in King County is worth?",
+                                             style = "position: absolute;
+                                              top: 35%;
+                                              left: 50%;
+                                              transform: translate(-50%, -50%);
+                                              -ms-transform: translate(-50%, -50%);
+                                              background-color: rgba(255, 255, 255,0.45);
+                                              color: black;
+                                              font-size: 16px;
+                                              padding: 12px 24px;
+                                              border: none;
+                                              cursor: pointer;
+                                              border-radius: 5px;"),
+                                h3("Start getting a precise predicition based on AI about your real estate in King Country!",
+                                     style = "position: absolute;
+                                              top: 40%;
+                                              left: 50%;
+                                              transform: translate(-50%, -50%);
+                                              -ms-transform: translate(-50%, -50%);
+                                              background-color: rgba(255, 255, 255,0.45);
+                                              color: black;
                                               font-size: 16px;
                                               padding: 12px 24px;
                                               border: none;
@@ -50,6 +82,7 @@ ui <- dashboardPage(skin = "midnight",
                                               border-radius: 5px;"),
                         ),
                         # Second tab content
+                        #-----------------------------------------------------------------
                         tabItem(tabName = "Dashboard",
                                 h2("Welcome to the dashboard"),
                                 
@@ -75,6 +108,7 @@ ui <- dashboardPage(skin = "midnight",
                         ),
                         
                         # Third tab content
+                        #-----------------------------------------------------------------
                         tabItem(tabName = "Prediction",
                                 h2("Widgets tab content"),
                                 
@@ -93,6 +127,7 @@ ui <- dashboardPage(skin = "midnight",
                                 )
                         ),
                         # Fourth tab content
+                        #-----------------------------------------------------------------
                         tabItem(tabName = "Map",
                                 box(
                                   selectizeInput("zip","Zipcode", 
@@ -107,6 +142,7 @@ ui <- dashboardPage(skin = "midnight",
                                 )
                         ),
                         # Fifth tab content
+                        #-----------------------------------------------------------------
                         tabItem(tabName = "About",
                                 div(
                                   h1("About the project"),

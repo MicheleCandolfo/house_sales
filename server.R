@@ -1,8 +1,19 @@
 
 server <- function(input, output, session) {
-  house_prices <- read.csv("kc_house_data.csv")
-  
-  #output$value <- renderPrint({ input$num })
+    
+    
+    #Load the data 
+    house_prices <- read.csv("kc_house_data.csv")
+    
+    #Action button on the landing page 
+    #observeEvent(input$switchtab, {
+      #newtab <- switch(input$tabs,
+                       #"Home" = "Prediction",
+                       #"Predicition" = "Home"
+      #)
+      #updateTabItems(session, newtab)
+    #})
+
   
   
     output$int_map <- renderLeaflet({
