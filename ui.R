@@ -11,7 +11,7 @@ install.load::install_load(c("shiny",
 ui <- dashboardPage(skin = "midnight",
                     dashboardHeader(title = tagList(
                       span(class = "logo-lg", "KC House Prices"), 
-                      img(src = "/logo.png",
+                      img(src = "/images/logo.png",
                           style = "height: auto; width: 180%"))),
                       dashboardSidebar(collapsed = TRUE,
                                      sidebarMenu(
@@ -19,7 +19,7 @@ ui <- dashboardPage(skin = "midnight",
                                        menuItem("Dashboard", tabName = "Dashboard", icon = icon("tachometer-alt")),
                                        menuItem("Prediction", tabName = "Prediction", icon = icon("chart-line")),
                                        menuItem("Map", tabName = "Map", icon = icon("globe-americas")),
-                                       menuItem("Information", tabName = "Information", icon = icon("info-circle"))
+                                       menuItem("About", tabName = "About", icon = icon("info-circle"))
                                      )
                     ),
                     dashboardBody(tags$head(
@@ -31,7 +31,7 @@ ui <- dashboardPage(skin = "midnight",
                         # First tab content
                         tabItem(tabName = "Home", style = "border: none",
                                 
-                                img(src = "/house.jpg", 
+                                img(src = "/images/house.jpg", 
                                     style = "height: auto; width: 100%; border: none; border-radius: 5px", 
                                       ),
                                 
@@ -75,7 +75,7 @@ ui <- dashboardPage(skin = "midnight",
                         ),
                         
                         # Third tab content
-                        tabItem(tabName = "Predicition",
+                        tabItem(tabName = "Prediction",
                                 h2("Widgets tab content"),
                                 
                                 box(
@@ -107,7 +107,7 @@ ui <- dashboardPage(skin = "midnight",
                                 )
                         ),
                         # Fifth tab content
-                        tabItem(tabName = "Information",
+                        tabItem(tabName = "About",
                                 div(
                                   h1("About the project"),
                                   br(),
@@ -119,9 +119,41 @@ ui <- dashboardPage(skin = "midnight",
                                   br(),
                                   h2("About data preparation"),
                                   br(),
-                                  h2("About the team"))
+                                  h2("About the team")),
+
                                 
+                                  div(class ="container", 
+                                    div(class ="row",
+                                      div(class="col-md-12"),
+                                        h1(class="title fit-h1","Who we are?")),
+                                    div(class="marketing"),
+                                      div(class="row",
+                                        div(class="col-md-4",
+                                          img(class="img-circle", src="/images/leandra.png", alt="", width = 200),
+                                          h2("Leandra Sommer"),
+                                          code("Data loving and collaborative leader that enjoys team-based environments dedicated to identifying and implementing business solutions that enable teams to deliver superior products, content and service to clients."),
+                                          a(href="https://www.linkedin.com/in/patrick-kurz-85b73813b")),
+                                        div(class="col-md-4",
+                                          img(class="img-circle", src="/images/michele.png", alt="", width = 200),
+                                          h2("Michele Candolfo"),
+                                          code("Data loving and collaborative leader that enjoys team-based environments dedicated to identifying and implementing business solutions that enable teams to deliver superior products, content and service to clients."),
+                                          a(href="https://www.linkedin.com/in/michele-candolfo-175087152")),
+                                        div(class="col-md-4",
+                                          img(class="img-circle", src="/images/patrick.png", alt="", width = 200),
+                                          h2("Patrick Kurz"),
+                                          code("Data loving and collaborative leader that enjoys team-based environments dedicated to identifying and implementing business solutions that enable teams to deliver superior products, content and service to clients."),
+                                          a(href="https://www.linkedin.com/in/patrick-kurz-85b73813b")),
+                                      ),
+                                  #add custom style css
+                                  tags$head(
+                                  tags$link(rel = "stylesheet", 
+                                            type = "text/css", 
+                                            href = "/carousel.css"),
+                                  #tags$script(src = "/holder.js")
+                                  ),
+                                  tags$style(type="text/css"
+                                  ) 
                         )
                       )
                     )
-)
+))
