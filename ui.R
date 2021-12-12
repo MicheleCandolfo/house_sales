@@ -6,7 +6,9 @@ install.load::install_load(c("shiny",
                              "ggplot2",
                              "dplyr",
                              "shinydashboard",
-                             "shinydashboardPlus"))
+                             "shinydashboardPlus", 
+                             "shinyjs"
+                            ))
 
 ui <- dashboardPage(skin = "midnight",
                     dashboardHeader(title = tagList(
@@ -24,6 +26,7 @@ ui <- dashboardPage(skin = "midnight",
                     ),
                     #-----------------------------------------------------------------
                     dashboardBody( style = "border: none",
+                                   useShinyjs(),
                       
                       tags$head(
                       # Include the custom styling
@@ -39,8 +42,10 @@ ui <- dashboardPage(skin = "midnight",
                                 img(src = "/images/house.jpg", 
                                     style = "height: auto; width: 100%; border: none; border-radius: 5px", 
                                       ),
+                      
                                 
-                                actionButton('actionButton', 'Get your prediciton',
+                            
+                                actionButton('keks', 'Keks', onclick="location.href='Prediction';",
                                     style = "position: absolute;
                                               top: 48%;
                                               left: 50%;

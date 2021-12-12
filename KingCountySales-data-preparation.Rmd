@@ -110,15 +110,15 @@ house_prices3<-house_prices2[!(house_prices2$bedrooms==0 | house_prices2$bathroo
 ```
 ```{r kategorischeVariablen}
 #house_prices3$floors <- as.factor(house_prices3$floors)
-#house_prices3$waterfront <- as.factor(house_prices3$waterfront)
-#house_prices3$grade <- as.factor(house_prices3$grade)
-#house_prices3$condition <- as.factor(house_prices3$condition)
+house_prices3$waterfront <- as.factor(house_prices3$waterfront)
+house_prices3$grade <- as.factor(house_prices3$grade)
+house_prices3$condition <- as.factor(house_prices3$condition)
 #house_prices3$zipcode <- as.factor(house_prices3$zipcode)
 
 #Hinzufügen von zwei Spalten (boolean) (basement und renovated)
-house_prices3$basement <- (ifelse(house_prices3$sqft_basement>0,1,0))
-house_prices3$renovated <- (ifelse(house_prices3$yr_renovated>0,1,0))
-house_prices3
+house_prices3$basement <- as.factor(ifelse(house_prices3$sqft_basement>0,1,0))
+house_prices3$renovated <- as.factor(ifelse(house_prices3$yr_renovated>0,1,0))
+house_prices3 
 ```
 ##Visualisierung der numerischen Variablen 
 ### Pearson-Korrelation
@@ -460,8 +460,12 @@ head(house_prices4)
 
 ```{r model training }
 
+house_prices4$yearb<-cut(house_prices4$yr_built,c(1900,1950,2000,2020))
+house_prices4$yearb<-factor(house_prices4$yearb,levels = c("(1.9e+03,1.95e+03]","(1.95e+03,2e+03]","(2e+03,2.02e+03]"),labels = c("1900-1950","1950-2000","2000-2020"))
+house_prices4<-house_prices4 %>% filter(!is.na(yearb))
+
 #Choosing features
-house_prices5=house_prices4[,c("price","bedrooms","bathrooms","floors","waterfront","view","grade","condition","yr_built", "sqm_living","sqm_above", "basement","sqm_lot15", "sqm_living15" ,"lat", "long", "renovated")]
+house_prices5=house_prices4[,c("price","bedrooms","bathrooms","waterfront","condition","grade", "sqm_living", "basement","renovated", "zipcode", "yearb","sqm_lot15","sqm_living15", "floors")]
 
 colnames(house_prices5)
 
@@ -491,10 +495,40 @@ head(actuals_preds)'
 
 ```
 ```  {r test}
-house_for_lm <- train %>% select(-long)
+#house_for_lm <- train %>% select(-long)
 
-model2=lm(log(price) ~., data = house_for_lm)
+#model2=lm(log(price) ~., data = house_for_lm)
 
-summary(model2)
+#summary(model2)
 
+```
+```{r libRandomForest}
+
+install.packages("randomForest")
+library(randomForest)
+install.packages('caret')
+library(caret)
+```
+
+```{r tests}
+head(house_prices5)
+
+```
+
+```{r randomForest}
+
+
+model=randomForest(price~.,train)
+model
+
+
+predict=predict(model,test[,-1])
+postResample(test$price,predict)
+
+
+
+```
+```{r IMp}
+importance(model)
+varImpPlot(model,type=2)
 ```

@@ -6,12 +6,8 @@ server <- function(input, output, session) {
     house_prices <- read.csv("kc_house_data.csv")
     
     #Action button on the landing page 
-    #observeEvent(input$switchtab, {
-      #newtab <- switch(input$tabs,
-                       #"Home" = "Prediction",
-                       #"Predicition" = "Home"
-      #)
-      #updateTabItems(session, newtab)
+    #observeEvent(input$keks, {
+     # open(tabItem="Prediction")
     #})
 
   
