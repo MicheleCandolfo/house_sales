@@ -91,24 +91,17 @@ ui <- dashboardPage(skin = "midnight",
                         tabItem(tabName = "Dashboard",
                                 h2("Welcome to the dashboard"),
                                 
-                                valueBox("Anzahl IDs", "House count", icon = icon("file-csv"), color = "green", width = 3),
-                                valueBox("$/QM", "$/QM", icon = icon("dollar-sign"), color = "green", width = 3),
-                                valueBox("MDP", "Med Price Dev", icon = icon("dollar-sign"), color = "green", width = 3),
-                                valueBox("MHP", "Med House Price", icon = icon("dollar-sign"), color = "green", width = 3),
-                                valueBox("MQM", "Med QM", icon = icon("square"), color = "green", width = 3),
+                               box(width = 12, 
+                                   
+                              
+                                valueBoxOutput("vbox1"),
+                                valueBoxOutput("vbox2"),
+                                valueBoxOutput("vbox3"),
+                                valueBoxOutput("vbox4"),
+                                valueBoxOutput("vbox5")
                                 
-                                box(
-                                  title = "Histogram", status = "primary", solidHeader = TRUE,
-                                  collapsible = TRUE,
-                                  plotOutput("plot3", height = 250)
-                                ),
-                                
-                                box(
-                                  title = "Inputs", status = "warning", solidHeader = TRUE,
-                                  "Box content here", br(), "More box content",
-                                  sliderInput("slider", "Slider input:", 1, 100, 50),
-                                  textInput("text", "Text input:")
                                 )
+                        
                                 
                         ),
                         
@@ -117,42 +110,98 @@ ui <- dashboardPage(skin = "midnight",
                         tabItem(tabName = "Prediction",
                                 h2("Prediction"),
                                 
-                                box(
-                                  numericInput("sqm_liv", label = h3("sqm_living"), value = 0, min= 1),
+                                box(width = 3,
+                                    h1("Enter your values"),
+                                    hr(),
+                                  numericInput("sqm_liv", label = h3("sqm_living"), value = 0, min= 1), #sqm_live will be sent to the server
                                   selectInput("grade", label = h3("Grade"), 
-                                              choices = list("1" = 1, "2" = 2, "3" = 3, "4" = 4, "5" = 5), 
+                                              choices = list("1" = 1, "2" = 2, "3" = 3, "4" = 4, "5" = 5), #grade will be sent to the server
                                               ),
-                                  numericInput("bathrooms", label = h3("bathrooms"), value = 0, min= 0,5),
-                                  selectizeInput("zipCodePre",label = h3("Zipcode"), 
+                                  numericInput("bathrooms", label = h3("bathrooms"), value = 0.5, min= 0,5), #bathrooms will be sent to the server
+                                  selectizeInput("zipCodePre",label = h3("Zipcode"), #zipCodePre will be sent to the server
                                                  choices= c("98178", "98125","98028", "98136", "98074", "98053", "98003", "98198", "98146" )),
                                  
-                                  selectizeInput("yearb", label = h3("Year built"), 
+                                  selectizeInput("yearb", label = h3("Year built"), #yearb will be sent to the server
                                               choices = c("1900-1950","1950-2000", "2000-2021")), 
-                                  sliderInput("bedrooms", label = h3("Bedrooms"), min = 1, 
+                                  sliderInput("bedrooms", label = h3("Bedrooms"), min = 0, #bedrooms will be sent to the server
                                               max = 20, value = 4),
-                                  sliderInput("floors", label = h3("Floors"), min = 0, 
+                                  sliderInput("floors", label = h3("Floors"), min = 0, #floors will be sent to the server
                                               max = 5, value = 2),
-                                  selectizeInput("condition", label = h3("Condition"), 
+                                  selectizeInput("condition", label = h3("Condition"), #condition will be sent to the server
                                                  choices = c("1","2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13")),
                                   hr(),
-                                  checkboxGroupInput("sonstiges", label = h3("Sonstiges"), 
-                                                     choices = list("Waterfront" = 1, "basement" = 2, "Renovated" = 3)),
-                                  hr(),
-                                  actionButton("action", label = "Predict")
+                                  checkboxGroupInput("sonstiges", label = h3("Sonstiges"), #sonstiges will be sent to the server
+                                                     choices = list("Waterfront" = "Waterfront", "basement" = "Basement", "Renovated" = "Renovated")),
+                                  hr()
+                                  
                             
+                                ),
+                                
+                                box(width = 9, 
+                                  h1("Predicition"),
+                                  hr(),
+                                  h3("Check you inputs:"),
+                                  #Prediciton is generated from the server 
+                                  infoBoxOutput("ibox0"),
+                                  infoBoxOutput("ibox1"),
+                                  infoBoxOutput("ibox2"),
+                                  infoBoxOutput("ibox3"),
+                                  infoBoxOutput("ibox4"),
+                                  infoBoxOutput("ibox5"),
+                                  infoBoxOutput("ibox6"),
+                                  infoBoxOutput("ibox7"),
+                                  infoBoxOutput("ibox8"),
+          
+                                  
+                                  
+                                  box(width = 4,
+                                    h2()
+                                    ),
+                                  
+                                  box(width = 4,
+                                    h2(),
+                                    actionButton("action", label = "Predict",
+                                                 style = "position: absolute;
+                                              top: 45%;
+                                              left: 50%;
+                                              transform: translate(-50%, -50%);
+                                              -ms-transform: translate(-50%, -50%);
+                                              background-color: rgba(0, 191, 255);
+                                              color: white;
+                                              font-size: 16px;
+                                              padding: 12px 24px;
+                                              border: none;
+                                              cursor: pointer;
+                                              border-radius: 5px;"
+                                                 
+                                    )),
+                                  
+                                  box(width = 4,
+                                      h2()
+                                      )
+                                  
+                                  
+                                ),
+                                
+                                box(width = 9, 
+                                    h1("Result of the predicition"),
+                                    hr()
+                                    
                                 )
                         ),
+                        #End of prediciton------------------------------------------------
                         # Fourth tab content
                         #-----------------------------------------------------------------
                         tabItem(tabName = "Map",
-                                box(
+                                h2("Welcome to the Map"),
+                                box(width = 2,
                                   selectizeInput("zip","Zipcode", 
                                                  choices= c("98178", "98125","98028", "98136", "98074", "98053", "98003", "98198", "98146" ), 
                                   )
                                   
                                 ),
                                 
-                                box(
+                                box(width = 10,
                                   leafletOutput("int_map")
                                   
                                 )
