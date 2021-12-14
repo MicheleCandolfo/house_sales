@@ -5,14 +5,100 @@ date: "14 12 2021"
 output: html_document
 ---
 
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
 
-
-```{r cars}
-summary(cars)
+#Packages installieren 
+```{r library}
+install.packages("dplyr")
+install.packages("ggplot2")
+install.packages("corrplot")
+install.packages("leaflet")
+install.packages("caTools")
+install.packages("randomForest")
+install.packages('caret')
+library(randomForest)
+library(caret)
+library("leaflet")
+library("corrplot")
+library("ggplot2")
+library("dplyr")
+library("caTools")
 ```
+
+#Daten einlesen und Data preparation
+
+```{r dataset}
+house_prices <- read.csv("kc_house_data.csv")
+
+#Data preparation
+# bedrooms DS mit Null-Werten rauswerfen und DS ändern 33 zu 3 Schlafzimmer
+house_prices2 <- house_prices
+house_prices2[house_prices2$id==2402100895, "bedrooms"] <- 3
+house_prices3<-house_prices2[!(house_prices2$bedrooms==0 | house_prices2$bathrooms==0),]
+
+#Spalten As FActor
+house_prices3$floors <- as.factor(house_prices3$floors)
+house_prices3$waterfront <- as.factor(house_prices3$waterfront)
+house_prices3$grade <- as.factor(house_prices3$grade)
+house_prices3$condition <- as.factor(house_prices3$condition)
+#house_prices3$zipcode <- as.factor(house_prices3$zipcode)
+
+#Hinzufügen von zwei Spalten (boolean) (basement und renovated)
+house_prices3$basement <- as.factor(ifelse(house_prices3$sqft_basement>0,1,0))
+house_prices3$renovated <- as.factor(ifelse(house_prices3$yr_renovated>0,1,0))
+
+# Ausreisser entfernen 
+house_prices4 = subset(house_prices3,!(house_prices3$price > 6000000))
+house_prices4 = subset(house_prices4,!(house_prices4$sqft_living > 10000))
+
+#sqft --> sqm
+qm <- 0.092903
+house_prices4$sqm_living <- round(house_prices4$sqft_living *qm)
+
+house_prices4$sqm_lot <- round(house_prices4$sqft_lot *qm)
+
+house_prices4$sqm_lot15 <- round(house_prices4$sqft_lot15 *qm)
+
+house_prices4$sqm_living15 <- round(house_prices4$sqft_living15 *qm)
+
+house_prices4$sqm_above <- round(house_prices4$sqft_above *qm)
+
+house_prices4$sqm_basement <- round(house_prices4$sqft_basement *qm)
+
+#drop sqft columns
+house_prices4[,c("sqft_living","sqft_lot","sqft_above","sqft_basement","sqft_lot15","sqft_living15")] <- list(NULL)
+
+
+house_prices4$yearb<-cut(house_prices4$yr_built,c(1900,1950,2000,2020))
+house_prices4$yearb<-factor(house_prices4$yearb,levels = c("(1.9e+03,1.95e+03]","(1.95e+03,2e+03]","(2e+03,2.02e+03]"),labels = c("1900-1950","1950-2000","2000-2020"))
+house_prices4<-house_prices4 %>% filter(!is.na(yearb))
+
+#Choosing features
+house_prices5=house_prices4[,c("price","bedrooms","bathrooms","waterfront","condition","grade", "sqm_living", "basement","renovated", "zipcode", "yearb", "floors")]
+
+#Teilung der Daten Training und Test 
+set.seed(5) 
+sample <- sample.split(house_prices4, SplitRatio = .80)
+train <- subset(house_prices5, sample == TRUE)
+test  <- subset(house_prices5, sample == FALSE)
+```
+
+```{r prediction}
+model=randomForest(price~.,train)
+model
+
+
+predict=predict(model,test[,-1])
+postResample(test$price,predict)
+
+importance(model)
+varImpPlot(model,type=2)
+
+```
+
+
 
