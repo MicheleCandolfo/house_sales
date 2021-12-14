@@ -29,7 +29,7 @@ library("caTools")
 ```{r dataset}
 house_prices <- read.csv("kc_house_data.csv")
 View(house_prices)
-str(house_prices)
+#str(house_prices)
 dim(house_prices)
 
 # Genaueres Betrachten des Datensatzes
@@ -109,7 +109,7 @@ house_prices3<-house_prices2[!(house_prices2$bedrooms==0 | house_prices2$bathroo
 
 ```
 ```{r kategorischeVariablen}
-#house_prices3$floors <- as.factor(house_prices3$floors)
+house_prices3$floors <- as.factor(house_prices3$floors)
 house_prices3$waterfront <- as.factor(house_prices3$waterfront)
 house_prices3$grade <- as.factor(house_prices3$grade)
 house_prices3$condition <- as.factor(house_prices3$condition)
@@ -465,7 +465,7 @@ house_prices4$yearb<-factor(house_prices4$yearb,levels = c("(1.9e+03,1.95e+03]",
 house_prices4<-house_prices4 %>% filter(!is.na(yearb))
 
 #Choosing features
-house_prices5=house_prices4[,c("price","bedrooms","bathrooms","waterfront","condition","grade", "sqm_living", "basement","renovated", "zipcode", "yearb","sqm_lot15","sqm_living15", "floors")]
+house_prices5=house_prices4[,c("price","bedrooms","bathrooms","waterfront","condition","grade", "sqm_living", "basement","renovated", "zipcode", "yearb", "floors")]
 
 colnames(house_prices5)
 

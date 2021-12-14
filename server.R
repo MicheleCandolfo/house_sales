@@ -11,6 +11,15 @@ server <- function(input, output, session) {
     #})
 
   
+    #output$value <- renderPrint({ input$num }) sqm_living
+    #output$value <- renderPrint({ input$select }) grade
+    #output$value <- renderPrint({ input$bathrooms }) bathrooms
+    #output$value <- renderPrint({ input$select }) zipcode
+    #output$value <- renderPrint({ input$select }) yearb
+    #output$value <- renderPrint({ input$slider1 }) bedrooms
+    #output$value <- renderPrint({ input$slider1 }) floors
+
+    
   
     output$int_map <- renderLeaflet({
         data <- dplyr::select(house_prices, price, lat, long, zipcode)

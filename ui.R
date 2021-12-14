@@ -115,20 +115,31 @@ ui <- dashboardPage(skin = "midnight",
                         # Third tab content
                         #-----------------------------------------------------------------
                         tabItem(tabName = "Prediction",
-                                h2("Widgets tab content"),
+                                h2("Prediction"),
                                 
                                 box(
-                                  numericInput("bed", label = h3("Bedrooms"), value = 0),
-                                  numericInput("bath", label = h3("Bathrooms"), value = 0),
-                                  numericInput("floors", label = h3("Floors"), value = 0),
-                                  numericInput("view", label = h3("View"), value = 0),
-                                  numericInput("grade", label = h3("Grade"), value = 0),
-                                  numericInput("con", label = h3("Condition"), value = 0),
-                                  numericInput("yr_b", label = h3("Year built"), value = 0),
-                                  numericInput("sqm_liv", label = h3("sqm_living"), value = 0),
-                                  numericInput("sqm_ab", label = h3("sqm_above"), value = 0),
+                                  numericInput("sqm_liv", label = h3("sqm_living"), value = 0, min= 1),
+                                  selectInput("grade", label = h3("Grade"), 
+                                              choices = list("1" = 1, "2" = 2, "3" = 3, "4" = 4, "5" = 5), 
+                                              ),
+                                  numericInput("bathrooms", label = h3("bathrooms"), value = 0, min= 0,5),
+                                  selectizeInput("zipCodePre",label = h3("Zipcode"), 
+                                                 choices= c("98178", "98125","98028", "98136", "98074", "98053", "98003", "98198", "98146" )),
+                                 
+                                  selectizeInput("yearb", label = h3("Year built"), 
+                                              choices = c("1900-1950","1950-2000", "2000-2021")), 
+                                  sliderInput("bedrooms", label = h3("Bedrooms"), min = 1, 
+                                              max = 20, value = 4),
+                                  sliderInput("floors", label = h3("Floors"), min = 0, 
+                                              max = 5, value = 2),
+                                  selectizeInput("condition", label = h3("Condition"), 
+                                                 choices = c("1","2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13")),
+                                  hr(),
                                   checkboxGroupInput("sonstiges", label = h3("Sonstiges"), 
-                                                     choices = list("Waterfront" = 1, "basement" = 2))
+                                                     choices = list("Waterfront" = 1, "basement" = 2, "Renovated" = 3)),
+                                  hr(),
+                                  actionButton("action", label = "Predict")
+                            
                                 )
                         ),
                         # Fourth tab content
