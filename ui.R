@@ -100,7 +100,16 @@ ui <- dashboardPage(skin = "midnight",
                                 valueBoxOutput("vbox4"),
                                 valueBoxOutput("vbox5")
                                 
-                                )
+                                ),
+                               box(title = "Hier benötigen wir noch einen guten Plot!",
+                                   
+                                   plotOutput("plot1", click = "plot_click")
+                                   
+                                   
+                                   
+                                   
+                                   )
+                               
                         
                                 
                         ),

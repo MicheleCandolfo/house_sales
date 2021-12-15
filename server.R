@@ -81,6 +81,9 @@ server <- function(input, output, session) {
     #model=randomForest(price~.,train)
     #model
     
+    #-> Hier müssen dann die input values von den User hinzugefügt werden
+    #predict(model, data.frame(train_x = c(1, 2, 3)))
+    
     
     #predict=predict(model,test[,-1])
     #postResample(test$price,predict)
@@ -165,6 +168,14 @@ server <- function(input, output, session) {
       )
     })
     
+    #Plot for dashboard
+    
+    output$plot1 <- renderPlot({
+      plot(house_prices3$yr_built, house_prices3$price, xlab="Year", ylab="Price", main="Price Development")
+    })
+    
+    
+    
     #Prediciton page info boxes---------------------------------------------------------
     output$ibox0 <- renderInfoBox({
       infoBox(
@@ -237,6 +248,10 @@ server <- function(input, output, session) {
         icon = icon("credit-card")
       )
     })
+    
+    #End of infoboxes-----------------------------------
+    #View(house_prices3)
+  
 
     
   
