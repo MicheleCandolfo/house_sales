@@ -39,14 +39,15 @@ ui <- dashboardPage(skin = "midnight",
                         #-----------------------------------------------------------------
                         tabItem(tabName = "Home", style = "border: none",
                                 
-                                img(src = "/images/house.jpg", 
-                                    style = "height: auto; width: 100%; border: none; border-radius: 5px", 
-                                      ),
-                      
-                                
-                            
-                                actionButton('keks', 'Keks', onclick="location.href='Prediction';",
-                                    style = "position: absolute;
+                        
+                        img(src = "/images/house.jpg", 
+                            style = "height: auto; width: 100%; border: none; border-radius: 5px", 
+                        ),
+                        
+                        
+                        
+                        actionButton('prediction', 'Prediction', onclick="location.href='Prediction';",
+                                     style = "position: absolute;
                                               top: 48%;
                                               left: 50%;
                                               transform: translate(-50%, -50%);
@@ -58,9 +59,9 @@ ui <- dashboardPage(skin = "midnight",
                                               border: none;
                                               cursor: pointer;
                                               border-radius: 5px;"),
-                                
-                                h2("You like to know how much your real estate in King County is worth?",
-                                             style = "position: absolute;
+                        
+                        h2("You like to know how much your real estate in King County is worth?",
+                           style = "position: absolute;
                                               top: 35%;
                                               left: 50%;
                                               transform: translate(-50%, -50%);
@@ -72,8 +73,8 @@ ui <- dashboardPage(skin = "midnight",
                                               border: none;
                                               cursor: pointer;
                                               border-radius: 5px;"),
-                                h3("Start getting a precise predicition based on AI about your real estate in King Country!",
-                                     style = "position: absolute;
+                        h3("Start getting a precise predicition based on AI about your real estate in King Country!",
+                           style = "position: absolute;
                                               top: 40%;
                                               left: 50%;
                                               transform: translate(-50%, -50%);
@@ -85,7 +86,9 @@ ui <- dashboardPage(skin = "midnight",
                                               border: none;
                                               cursor: pointer;
                                               border-radius: 5px;"),
-                        ),
+                      ),
+                                
+                                
                         # Second tab content
                         #-----------------------------------------------------------------
                         tabItem(tabName = "Dashboard",
@@ -139,8 +142,15 @@ ui <- dashboardPage(skin = "midnight",
                                   selectizeInput("condition", label = h3("Condition"), #condition will be sent to the server
                                                  choices = c("1","2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13")),
                                   hr(),
-                                  checkboxGroupInput("sonstiges", label = h3("Sonstiges"), #sonstiges will be sent to the server
-                                                     choices = list("Waterfront" = "Waterfront", "basement" = "Basement", "Renovated" = "Renovated")),
+                                  selectInput("waterfront", label = h3("Waterfront"), 
+                                              choices = list("Yes" = TRUE, "No" = FALSE), #Waterfront will be sent to the server
+                                  ),
+                                  selectInput("basement", label = h3("Basement"), 
+                                              choices = list("Yes" = TRUE, "No" = FALSE), #Basement will be sent to the server
+                                  ),
+                                  selectInput("renovated", label = h3("Renovated"), 
+                                              choices = list("Yes" = TRUE, "No" = FALSE), #Renovated will be sent to the server
+                                  ),
                                   hr()
                                   
                             
@@ -160,6 +170,8 @@ ui <- dashboardPage(skin = "midnight",
                                   infoBoxOutput("ibox6"),
                                   infoBoxOutput("ibox7"),
                                   infoBoxOutput("ibox8"),
+                                  infoBoxOutput("ibox9"),
+                                  infoBoxOutput("ibox10"),
           
                                   
                                   

@@ -20,6 +20,8 @@ install.packages("leaflet")
 install.packages("caTools")
 install.packages("randomForest")
 install.packages('caret')
+install.packages('yaml')
+install.packages("tidypredict")
 library(randomForest)
 library(caret)
 library("leaflet")
@@ -27,6 +29,10 @@ library("corrplot")
 library("ggplot2")
 library("dplyr")
 library("caTools")
+library("yaml")
+library("tidypredict")
+
+
 ```
 
 #Daten einlesen und Data preparation
@@ -92,11 +98,21 @@ model=randomForest(price~.,train)
 model
 
 
-predict=predict(model,test[,-1])
-postResample(test$price,predict)
 
-importance(model)
-varImpPlot(model,type=2)
+
+#predict=predict(model,test[,-1])
+#postResample(test$price,predict)
+
+#importance(model)
+#varImpPlot(model,type=2)
+
+```
+
+```{r keks}
+
+parsed <- parse_model(model)
+
+write_yaml(parsed, "my_model.yml")
 
 ```
 

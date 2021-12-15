@@ -11,7 +11,8 @@ install.load::install_load(c("shiny",
                              "shinyjs",
                              "randomForest",
                              "caret",
-                             "caTools"
+                             "caTools", 
+                             "yaml"
 ))
 
 
@@ -78,12 +79,16 @@ server <- function(input, output, session) {
     test  <- subset(house_prices5, sample == FALSE)
     
     #Train the model 
+    
     #model=randomForest(price~.,train)
+    #write_yaml(model, "my_model.yml")
     #model
     
     #-> Hier müssen dann die input values von den User hinzugefügt werden
     #predict(model, data.frame(train_x = c(1, 2, 3)))
     
+    #input_user <- c(input$bedrooms,input$yearb, input$zipCodePre, input$bathrooms, input$grade, input$sqm_liv, input$zip, input$renovated, input$basement, input$waterfront)
+    #print(input_user)
     
     #predict=predict(model,test[,-1])
     #postResample(test$price,predict)
@@ -96,13 +101,12 @@ server <- function(input, output, session) {
     #Checking if the data is correct and displayed!
     #View(house_prices5)
     
-    
-    
-    
+  
     #Action button on the landing page 
     #observeEvent(input$keks, {
      # open(tabItem="Prediction")
     #})
+    
 
   
     #output$value <- renderPrint({ input$num }) sqm_living
@@ -243,8 +247,23 @@ server <- function(input, output, session) {
     
     output$ibox8 <- renderInfoBox({
       infoBox(
-        "Extra",
-        input$sonstiges,
+        "Waterfront",
+        input$waterfront,
+        icon = icon("credit-card")
+      )
+    })
+    
+    output$ibox9 <- renderInfoBox({
+      infoBox(
+        "Basement",
+        input$basement, 
+        icon = icon("credit-card")
+      )
+    })
+    output$ibox10 <- renderInfoBox({
+      infoBox(
+        "Renovated",
+        input$renovated,
         icon = icon("credit-card")
       )
     })
