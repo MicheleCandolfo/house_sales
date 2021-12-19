@@ -88,33 +88,47 @@ house_prices5=house_prices4[,c("price","bedrooms","bathrooms","waterfront","cond
 
 #Teilung der Daten Training und Test 
 set.seed(5) 
-sample <- sample.split(house_prices4, SplitRatio = .80)
+sample <- sample.split(house_prices5, SplitRatio = .80)
 train <- subset(house_prices5, sample == TRUE)
 test  <- subset(house_prices5, sample == FALSE)
 ```
 
 ```{r prediction}
-model=randomForest(price~.,train)
+model=randomForest(price~.,train, ntree=500,mtry= 10,importance = TRUE,)
 model
 
+predict=predict(model,test[,-1])
 
-
-
-#predict=predict(model,test[,-1])
-#postResample(test$price,predict)
+postResample(test$price,predict)
 
 #importance(model)
 #varImpPlot(model,type=2)
 
-```
 
-```{r keks}
-
-parsed <- parse_model(model)
-
-write_yaml(parsed, "my_model.yml")
 
 ```
+
+
+```{r plott}
+
+
+install.packages("ranger")
+library(ranger)       # a faster implementation of randomForest
+
+model <- ranger(
+    formula         = price ~ ., 
+    data            = train, 
+    num.trees       = 500,
+    mtry            = 10
+  )
+model
+
+predict=predict(model,test[,-1])
+predict
+
+```
+
+
 
 
 

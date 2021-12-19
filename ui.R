@@ -7,7 +7,8 @@ install.load::install_load(c("shiny",
                              "dplyr",
                              "shinydashboard",
                              "shinydashboardPlus", 
-                             "shinyjs"
+                             "shinyjs", 
+                             "tippy"
                             ))
 
 ui <- dashboardPage(skin = "midnight",
@@ -126,8 +127,8 @@ ui <- dashboardPage(skin = "midnight",
                                     h1("Enter your values"),
                                     hr(),
                                   numericInput("sqm_liv", label = h3("sqm_living"), value = 0, min= 1), #sqm_live will be sent to the server
-                                  selectInput("grade", label = h3("Grade"), 
-                                              choices = list("1" = 1, "2" = 2, "3" = 3, "4" = 4, "5" = 5), #grade will be sent to the server
+                                  selectizeInput("grade", label = h3("Grade"), 
+                                              choices = list("1","2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"), #grade will be sent to the server
                                               ),
                                   numericInput("bathrooms", label = h3("bathrooms"), value = 0.5, min= 0,5), #bathrooms will be sent to the server
                                   selectizeInput("zipCodePre",label = h3("Zipcode"), #zipCodePre will be sent to the server
@@ -139,13 +140,14 @@ ui <- dashboardPage(skin = "midnight",
                                               max = 20, value = 4),
                                   sliderInput("floors", label = h3("Floors"), min = 0, #floors will be sent to the server
                                               max = 5, value = 2),
-                                  selectizeInput("condition", label = h3("Condition"), #condition will be sent to the server
-                                                 choices = c("1","2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13")),
+                                  selectizeInput("condition", label = h3("Condition"),#condition will be sent to the server
+                                                 choices = c("1","2", "3", "4", "5")),
+                                  tippy("Information about condition", tooltip = "1-3: schlecht, 4: beseer, 5: noch besser, 6: noch besser, 7: noch besser, 8: noch bessser, 9: noch besser, 10: noch besser, 11: noch besser, 12: noch besser, 13: noch besser "),
                                   hr(),
                                   selectInput("waterfront", label = h3("Waterfront"), 
                                               choices = list("Yes" = TRUE, "No" = FALSE), #Waterfront will be sent to the server
                                   ),
-                                  selectInput("basement", label = h3("Basement"), 
+                                  selectInput("basement", label = h3("Basement"),
                                               choices = list("Yes" = TRUE, "No" = FALSE), #Basement will be sent to the server
                                   ),
                                   selectInput("renovated", label = h3("Renovated"), 
@@ -181,7 +183,7 @@ ui <- dashboardPage(skin = "midnight",
                                   
                                   box(width = 4,
                                     h2(),
-                                    actionButton("action", label = "Predict",
+                                    actionButton("action_keks", label = "Predict",
                                                  style = "position: absolute;
                                               top: 45%;
                                               left: 50%;
@@ -199,6 +201,7 @@ ui <- dashboardPage(skin = "midnight",
                                   
                                   box(width = 4,
                                       h2()
+                                      
                                       )
                                   
                                   
@@ -206,7 +209,8 @@ ui <- dashboardPage(skin = "midnight",
                                 
                                 box(width = 9, 
                                     h1("Result of the predicition"),
-                                    hr()
+                                    hr(),
+                                    verbatimTextOutput("value")
                                     
                                 )
                         ),

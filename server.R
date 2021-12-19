@@ -12,7 +12,8 @@ install.load::install_load(c("shiny",
                              "randomForest",
                              "caret",
                              "caTools", 
-                             "yaml"
+                             "yaml", 
+                             "ranger"
 ))
 
 
@@ -78,6 +79,13 @@ server <- function(input, output, session) {
     train <- subset(house_prices5, sample == TRUE)
     test  <- subset(house_prices5, sample == FALSE)
     
+    model <- ranger(
+      formula         = price ~ ., 
+      data            = train, 
+      num.trees       = 500,
+      mtry            = 10
+    )
+   
     #Train the model 
     
     #model=randomForest(price~.,train)
@@ -87,7 +95,7 @@ server <- function(input, output, session) {
     #-> Hier müssen dann die input values von den User hinzugefügt werden
     #predict(model, data.frame(train_x = c(1, 2, 3)))
     
-    #input_user <- c(input$bedrooms,input$yearb, input$zipCodePre, input$bathrooms, input$grade, input$sqm_liv, input$zip, input$renovated, input$basement, input$waterfront)
+   
     #print(input_user)
     
     #predict=predict(model,test[,-1])
@@ -181,6 +189,31 @@ server <- function(input, output, session) {
     
     
     #Prediciton page info boxes---------------------------------------------------------
+    output$value <- renderPrint({ input$action_keks 
+      bedrooms <- input$bedrooms
+      bathrooms <- input$bathrooms
+      waterfront <- input$waterfront
+      condition <- input$condition
+      grade <- input$grade
+      sqm_living <- input$sqm_liv
+      basement <- input$basement
+      renovated <- input$renovated
+      zipcode<- input$zipCodePre
+      yearb <-input$yearb
+      floors <-input$floors
+      eis <- data.frame(bedrooms, bathrooms, waterfront, condition, grade, sqm_living, basement, renovated, zipcode, yearb, floors )
+      cookie <- predict(
+      model,
+      data = eis,
+      predict.all = FALSE,
+      num.trees = model$num.trees,
+      type = "response",
+      se.method = "infjack",
+      verbose = TRUE,
+    )
+    cookie$predictions
+    })
+    
     output$ibox0 <- renderInfoBox({
       infoBox(
         "Sqm living",
