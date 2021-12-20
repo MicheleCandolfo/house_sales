@@ -130,43 +130,38 @@ server <- function(input, output, session) {
     
     #Dashboard page value boxes--------------------------------------------------------
     
-    output$vbox1front <- renderValueBox({
+    output$vbox1 <- renderValueBox({
       valueBox(
         "Lowest Price",
-        min(house_prices5$price),
-        icon = icon("dollar-sign")
+        ""
       )
     })
     
     output$vbox2 <- renderValueBox({
       valueBox(
         "Mean Price",
-        round(mean(house_prices5$price)),
-        icon = icon("dollar-sign")
+        ""
       )
     })
     
     output$vbox3 <- renderValueBox({
       valueBox(
         "Highest Price",
-        max(house_prices5$price),
-        icon = icon("dollar-sign")
+        ""
       )
     })
     
     output$vbox4 <- renderValueBox({
       valueBox(
-        "Amount of Houses",
-        count(house_prices5),
-        icon = icon("file-csv")
+        "Houses",
+        ""
       )
     })
     
     output$vbox5 <- renderValueBox({
       valueBox(
         "Mean QM",
-        round(mean(house_prices5$sqm_living)),
-        icon = icon("square")
+        ""
       )
     })
     

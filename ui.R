@@ -95,38 +95,82 @@ ui <- dashboardPage(skin = "midnight",
                                 h2("Welcome to the dashboard"),
                                 
                                box(width = 12, 
-                          
-                                   column(
-                                     width = 6,
-                                     uiOutput("active_side_2"),
+                                
                                      flipBox(
-                                       id = "myflipbox2",
+                                       id = "myflipbox1",
                                        width = 4,
+                                
                                       front = div(
-                                         class = "text-center",
-                                         color = "red",
-                                         height = "300px",
-                                         "Lowest Price",
-                                        # icon = "dollar-sign"
+                                        class = "text-center",
+                                        width = 4,
+                                        valueBoxOutput("vbox1", width = 12),
+                                         
                                        ),
                                        back = div(
                                          class = "text-center",
-                                         
-                                         width = "100%",
-                                         color = "red",
-                                         height = "100%",
-                                         min(house_prices5$price)
+                                         width= 4,
+                                         h3(min(house_prices5$price)),
+                                         p("Lowest Price in $")
                                        )
-                                     )
+                                     
                                    ),
-                               
+                                   flipBox(
+                                     id = "myflipbox2",
+                                     width = 4,
+                                     
+                                     front = div(
+                                       class = "text-center",
+                                       width = 4,
+                                       valueBoxOutput("vbox2", width = 12),
+                                       
+                                     ),
+                                     back = div(
+                                       class = "text-center",
+                                       width= 4,
+                                       h3(round(mean(house_prices5$price))),
+                                       p("Mean price in $")
+                                     )
+                                     
+                                   ),
+                                   flipBox(
+                                     id = "myflipbox3",
+                                     width = 4,
+                                     
+                                     front = div(
+                                       class = "text-center",
+                                       width = 4,
+                                       valueBoxOutput("vbox3", width = 12),
+                                       
+                                     ),
+                                     back = div(
+                                       class = "text-center",
+                                       width= 4,
+                                       h3(max(house_prices5$price)),
+                                       p("Highest price in $")
+                                     )
+                                     
+                                   ),
+                                   flipBox(
+                                     id = "myflipbox4",
+                                     width = 4,
+                                     
+                                     front = div(
+                                       class = "text-center",
+                                       width = 4,
+                                       valueBoxOutput("vbox4", width = 12),
+                                       
+                                     ),
+                                     back = div(
+                                       class = "text-center",
+                                       width= 4,
+                                       h3(count(house_prices5)),
+                                       p("Houses"),
+                                     )
+                                     
+                                   ),
+                                 
                                    
-                                   
-                              
                                
-                                valueBoxOutput("vbox2"),
-                                valueBoxOutput("vbox3"),
-                                valueBoxOutput("vbox4"),
                                 valueBoxOutput("vbox5")
                                 
                                 ),
