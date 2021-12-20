@@ -22,7 +22,7 @@ server <- function(input, output, session) {
     
     #Load the data 
     house_prices <- read.csv("kc_house_data.csv")
-    
+  
     #Data preparation 
     # bedrooms DS mit Null-Werten rauswerfen und DS ändern 33 zu 3 Schlafzimmer
     house_prices2 <- house_prices
@@ -58,6 +58,8 @@ server <- function(input, output, session) {
     
     house_prices4$sqm_basement <- round(house_prices4$sqft_basement *qm)
     
+    
+    
     #drop sqft columns
     house_prices4[,c("sqft_living","sqft_lot","sqft_above","sqft_basement","sqft_lot15","sqft_living15")] <- list(NULL)
     
@@ -69,6 +71,7 @@ server <- function(input, output, session) {
     #End of data preparation--------------------------------------------------------------------------------
     
     #Start of modeling 
+    
     
     #Choosing features
     house_prices5=house_prices4[,c("price","bedrooms","bathrooms","waterfront","condition","grade", "sqm_living", "basement","renovated", "zipcode", "yearb", "floors")]
@@ -127,7 +130,7 @@ server <- function(input, output, session) {
     
     #Dashboard page value boxes--------------------------------------------------------
     
-    output$vbox1 <- renderValueBox({
+    output$vbox1front <- renderValueBox({
       valueBox(
         "Lowest Price",
         min(house_prices5$price),

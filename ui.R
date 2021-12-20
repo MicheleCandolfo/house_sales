@@ -44,8 +44,7 @@ ui <- dashboardPage(skin = "midnight",
                         img(src = "/images/house.jpg", 
                             style = "height: auto; width: 100%; border: none; border-radius: 5px", 
                         ),
-                        
-                        
+                       
                         
                         actionButton('prediction', 'Prediction', onclick="location.href='Prediction';",
                                      style = "position: absolute;
@@ -96,9 +95,35 @@ ui <- dashboardPage(skin = "midnight",
                                 h2("Welcome to the dashboard"),
                                 
                                box(width = 12, 
+                          
+                                   column(
+                                     width = 6,
+                                     uiOutput("active_side_2"),
+                                     flipBox(
+                                       id = "myflipbox2",
+                                       width = 4,
+                                      front = div(
+                                         class = "text-center",
+                                         color = "red",
+                                         height = "300px",
+                                         "Lowest Price",
+                                        # icon = "dollar-sign"
+                                       ),
+                                       back = div(
+                                         class = "text-center",
+                                         
+                                         width = "100%",
+                                         color = "red",
+                                         height = "100%",
+                                         min(house_prices5$price)
+                                       )
+                                     )
+                                   ),
+                               
+                                   
                                    
                               
-                                valueBoxOutput("vbox1"),
+                               
                                 valueBoxOutput("vbox2"),
                                 valueBoxOutput("vbox3"),
                                 valueBoxOutput("vbox4"),
