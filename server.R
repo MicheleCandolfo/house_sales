@@ -207,8 +207,8 @@ server <- function(input, output, session) {
     
     output$plot1 <- renderPlot({
       house_prices4 %>%
-        ggplot( aes(x=sqm_living, y=price, group=Year, color=Year)) +
-        geom_line(binwidth = 0.5)+
+        ggplot( aes(x=sqm_living, y=price, group=waterfront, color=waterfront)) +
+        geom_line()+
         scale_y_continuous(labels = scales::comma)+
         scale_y_continuous(labels = scales::dollar)
     })
@@ -216,7 +216,7 @@ server <- function(input, output, session) {
   
     
     #Prediciton page info boxes---------------------------------------------------------
-    output$value <- renderPrint({ input$action_keks 
+    output$value <- renderPrint({ input$action_predictions
       bedrooms <- input$bedrooms
       bathrooms <- input$bathrooms
       waterfront <- input$waterfront
@@ -228,17 +228,17 @@ server <- function(input, output, session) {
       zipcode<- input$zipCodePre
       yearb <-input$yearb
       floors <-input$floors
-      eis <- data.frame(bedrooms, bathrooms, waterfront, condition, grade, sqm_living, basement, renovated, zipcode, yearb, floors )
-      cookie <- predict(
+      input_user <- data.frame(bedrooms, bathrooms, waterfront, condition, grade, sqm_living, basement, renovated, zipcode, yearb, floors )
+      userPrediction <- predict(
       model,
-      data = eis,
+      data = input_user,
       predict.all = FALSE,
       num.trees = model$num.trees,
       type = "response",
       se.method = "infjack",
       verbose = TRUE,
     )
-    cookie$predictions
+    userPrediction$predictions
     })
     
     output$ibox0 <- renderInfoBox({

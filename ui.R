@@ -207,12 +207,12 @@ ui <- dashboardPage(skin = "midnight",
                                      
                                    )
                                 ),
-                               box(title = "please mark a variable to be grouped bye ", 
-                                   width = 4
+                               box(title = "please mark a variable ", 
+                                   width = 12
                                  
                                ),
-                               box(title = "Hier benötigen wir noch einen guten Plot!",
-                                   width = 8,
+                               box(
+                                   width = 12,
                                    
                                    plotOutput("plot1", click = "plot_click")
                                    
@@ -285,7 +285,7 @@ ui <- dashboardPage(skin = "midnight",
                                   
                                   box(width = 4,
                                     h2(),
-                                    actionButton("action_keks", label = "Predict",
+                                    actionButton("action_prediction", label = "Predict",
                                                  style = "position: absolute;
                                               top: 45%;
                                               left: 50%;
