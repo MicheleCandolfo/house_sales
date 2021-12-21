@@ -13,8 +13,12 @@ install.load::install_load(c("shiny",
                              "caret",
                              "caTools", 
                              "yaml", 
-                             "ranger"
+                             "ranger", 
+                             "lubridate"
+                             
 ))
+
+
 
 
 server <- function(input, output, session) {
@@ -35,7 +39,7 @@ server <- function(input, output, session) {
     house_prices3$grade <- as.factor(house_prices3$grade)
     house_prices3$condition <- as.factor(house_prices3$condition)
     #house_prices3$zipcode <- as.factor(house_prices3$zipcode)
-    
+  
     #Hinzufügen von zwei Spalten (boolean) (basement und renovated)
     house_prices3$basement <- as.factor(ifelse(house_prices3$sqft_basement>0,1,0))
     house_prices3$renovated <- as.factor(ifelse(house_prices3$yr_renovated>0,1,0))
@@ -67,6 +71,15 @@ server <- function(input, output, session) {
     house_prices4$yearb<-cut(house_prices4$yr_built,c(1900,1950,2000,2020))
     house_prices4$yearb<-factor(house_prices4$yearb,levels = c("(1.9e+03,1.95e+03]","(1.95e+03,2e+03]","(2e+03,2.02e+03]"),labels = c("1900-1950","1950-2000","2000-2020"))
     house_prices4<-house_prices4 %>% filter(!is.na(yearb))
+
+    house_prices4<-house_prices4 %>% 
+      mutate(id=as.factor(id)) %>% 
+      mutate(Date=str_replace_all(house_prices4$date,"T0{1,}","")) %>% 
+      select(Date,everything(),-date,-id)
+    house_prices4<-house_prices4 %>% 
+      mutate(Date=ymd(Date)) %>% 
+      separate(Date,c("Year","Month","Day"))
+    
     
     #End of data preparation--------------------------------------------------------------------------------
     
@@ -88,7 +101,18 @@ server <- function(input, output, session) {
       num.trees       = 500,
       mtry            = 10
     )
-   
+    testTest <- predict(
+      model,
+      data = test,
+      predict.all = FALSE,
+      num.trees = model$num.trees,
+      type = "response",
+      se.method = "infjack",
+      verbose = TRUE,
+    )
+    
+    #modelOutput<- data.frame(obs = test$price, pred = testTest$predictions)
+   #print(modelOutput )
     #Train the model 
     
     #model=randomForest(price~.,train)
@@ -170,21 +194,26 @@ server <- function(input, output, session) {
     
     price_qm <- (sum_prices/sum_qm)
     
-    output$vbox5 <- renderValueBox({
+    output$vbox6 <- renderValueBox({
       valueBox(
         "$/QM",
-        round(price_qm),
-        icon = icon("dollar-sign")
+        ""
       )
     })
     
     #Plot for dashboard
     
+
+    
     output$plot1 <- renderPlot({
-      plot(house_prices3$yr_built, house_prices3$price, xlab="Year", ylab="Price", main="Price Development")
+      house_prices4 %>%
+        ggplot( aes(x=sqm_living, y=price, group=Year, color=Year)) +
+        geom_line(binwidth = 0.5)+
+        scale_y_continuous(labels = scales::comma)+
+        scale_y_continuous(labels = scales::dollar)
     })
     
-    
+  
     
     #Prediciton page info boxes---------------------------------------------------------
     output$value <- renderPrint({ input$action_keks 

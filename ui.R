@@ -95,6 +95,7 @@ ui <- dashboardPage(skin = "midnight",
                                 h2("Welcome to the dashboard"),
                                 
                                box(width = 12, 
+                                   title= "Facts",
                                 
                                      flipBox(
                                        id = "myflipbox1",
@@ -168,23 +169,55 @@ ui <- dashboardPage(skin = "midnight",
                                      )
                                      
                                    ),
+                                   flipBox(
+                                     id = "myflipbox5",
+                                     width = 4,
+                                     
+                                     front = div(
+                                       class = "text-center",
+                                       width = 4,
+                                       valueBoxOutput("vbox5", width = 12),
+                                       
+                                     ),
+                                     back = div(
+                                       class = "text-center",
+                                       width= 4,
+                                       h3(round(mean(house_prices5$sqm_living))),
+                                       p("Mean QM"),
+                                     )
+                                     
+                                   ), 
                                  
-                                   
-                               
-                                valueBoxOutput("vbox5")
-                                
+                                   flipBox(
+                                     id = "myflipbox6",
+                                     width = 4,
+                                     
+                                     front = div(
+                                       class = "text-center",
+                                       width = 4,
+                                       valueBoxOutput("vbox6", width = 12),
+                                       
+                                     ),
+                                     back = div(
+                                       class = "text-center",
+                                       width= 4,
+                                       h3(round(sum(house_prices5$price)/sum(house_prices5$sqm_living))),
+                                       p("$/QM"),
+                                     )
+                                     
+                                   )
                                 ),
+                               box(title = "please mark a variable to be grouped bye ", 
+                                   width = 4
+                                 
+                               ),
                                box(title = "Hier benötigen wir noch einen guten Plot!",
+                                   width = 8,
                                    
                                    plotOutput("plot1", click = "plot_click")
                                    
-                                   
-                                   
-                                   
                                    )
                                
-                        
-                                
                         ),
                         
                         # Third tab content

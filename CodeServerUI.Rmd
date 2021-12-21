@@ -126,6 +126,8 @@ model
 predict=predict(model,test[,-1])
 predict
 
+modelOutput <- data.frame(obs = test$price, pred = prediction) 
+
 ```
 
 
