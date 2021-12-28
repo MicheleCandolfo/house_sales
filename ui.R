@@ -324,8 +324,16 @@ ui <- dashboardPage(skin = "midnight",
                                 box(width = 2,
                                   selectizeInput("zip","Zipcode", 
                                                  choices= c("98178", "98125","98028", "98136", "98074", "98053", "98003", "98198", "98146" ), 
+                                  ),
+                                  selectInput("waterfront", label = h3("Waterfront"), 
+                                              choices = list("Yes" = TRUE, "No" = FALSE), #Waterfront will be sent to the server
+                                  ),
+                                  selectInput("basement", label = h3("Basement"),
+                                              choices = list("Yes" = TRUE, "No" = FALSE), #Basement will be sent to the server
+                                  ),
+                                  selectInput("renovated", label = h3("Renovated"), 
+                                              choices = list("Yes" = TRUE, "No" = FALSE), #Renovated will be sent to the server
                                   )
-                                  
                                 ),
                                 
                                 box(width = 10,
