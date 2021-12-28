@@ -14,7 +14,7 @@ install.load::install_load(c("shiny",
 ui <- dashboardPage(skin = "midnight",
                     dashboardHeader(title = tagList(
                       span(class = "logo-lg", "KC House Prices"), 
-                      img(src = "/images/logo.png",
+                      img(src = "/images/house_icon.png",
                           style = "height: auto; width: 180%"))),
                       dashboardSidebar(collapsed = TRUE,
                                      sidebarMenu(
@@ -46,24 +46,26 @@ ui <- dashboardPage(skin = "midnight",
                         ),
                        
                         
-                        actionButton('prediction', 'Prediction', onclick="location.href='Prediction';",
-                                     style = "position: absolute;
-                                              top: 48%;
-                                              left: 50%;
-                                              transform: translate(-50%, -50%);
-                                              -ms-transform: translate(-50%, -50%);
-                                              background-color: rgba(0, 191, 255,0.5);
-                                              color: white;
-                                              font-size: 16px;
-                                              padding: 12px 24px;
-                                              border: none;
-                                              cursor: pointer;
-                                              border-radius: 5px;"),
+                        #actionButton('prediction', 'Prediction', onclick="location.href='Prediction';",
+                                     #style = "position: absolute;
+                                              #top: 48%;
+                                              #left: 50%;
+                                              #transform: translate(-50%, -50%);
+                                              #-ms-transform: translate(-50%, -50%);
+                                              #background-color: rgba(0, 191, 255,0.5);
+                                              #color: white;
+                                              #font-size: 16px;
+                                              #padding: 12px 24px;
+                                              #border: none;
+                                              #cursor: pointer;
+                                              #border-radius: 5px;"),
                         
-                        h2("You like to know how much your real estate in King County is worth?",
+                        div( h3("You like to know how much your real estate in King County is worth?"), 
+                             h3("You are just one click away from a precise prediciton based on AI!"),
+                             p(" "),
                            style = "position: absolute;
-                                              top: 35%;
-                                              left: 50%;
+                                              top: 16.5%;
+                                              left: 45%;
                                               transform: translate(-50%, -50%);
                                               -ms-transform: translate(-50%, -50%);
                                               background-color: rgba(255, 255, 255,0.45);
@@ -73,19 +75,22 @@ ui <- dashboardPage(skin = "midnight",
                                               border: none;
                                               cursor: pointer;
                                               border-radius: 5px;"),
-                        h3("Start getting a precise predicition based on AI about your real estate in King Country!",
-                           style = "position: absolute;
-                                              top: 40%;
-                                              left: 50%;
+                        img(src = "/images/giphy.gif",
+                            style = "position: absolute;
+                                              top: 16.5%;
+                                              left: 10%;
                                               transform: translate(-50%, -50%);
                                               -ms-transform: translate(-50%, -50%);
-                                              background-color: rgba(255, 255, 255,0.45);
+                                              #background-color: rgba(255, 255, 255,0.45);
                                               color: black;
                                               font-size: 16px;
                                               padding: 12px 24px;
                                               border: none;
                                               cursor: pointer;
-                                              border-radius: 5px;"),
+                                              border-radius: 5px;
+                                              height: 200px;
+                                              width: 300px;                  "),
+                        
                       ),
                                 
                                 
@@ -95,7 +100,7 @@ ui <- dashboardPage(skin = "midnight",
                                 h2("Welcome to the dashboard"),
                                 
                                box(width = 12, 
-                                   title= "Facts",
+                                   title= "Facts - Click Me!",
                                 
                                      flipBox(
                                        id = "myflipbox1",
@@ -344,6 +349,9 @@ ui <- dashboardPage(skin = "midnight",
                         # Fifth tab content
                         #-----------------------------------------------------------------
                         tabItem(tabName = "About",
+                      
+                                
+                                
                                 div(
                                   h1("About the project"),
                                   br(),
@@ -354,6 +362,7 @@ ui <- dashboardPage(skin = "midnight",
                                   h2("About the algorithm"),
                                   br(),
                                   h2("About data preparation"),
+                                  
                                   br(),
                                   h2("About the team")),
 
