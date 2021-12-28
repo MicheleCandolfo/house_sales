@@ -349,56 +349,25 @@ ui <- dashboardPage(skin = "midnight",
                         # Fifth tab content
                         #-----------------------------------------------------------------
                         tabItem(tabName = "About",
+                                box(title = "About the project", width = 12),
+                                box(title = "About the data set", width = 12),
+                                box(title = "General Information", width = 12),
+                                box(title = "Column description", width = 12),
+                                box(title = "About the algorithm", width = 12),
+                                box(title = "About data preparation", width = 12),
+                                box(title = "About the team - Who we are?", width = 12,
+                                    box(title = "Leandra Sommer", width = 4, img(class="img-circle", src="/images/leandra.png", alt="", width = 200),
+                                        br(""),
+                                        p("Data loving and collaborative leader that enjoys team-based environments dedicated to identifying and implementing business solutions that enable teams to deliver superior products, content and service to clients.")),
+                                    box(title = "Michele Candolfo", width = 4, img(class="img-circle", src="/images/michele.png", alt="", width = 200),
+                                        br(""),
+                                        p("Data loving and collaborative leader that enjoys team-based environments dedicated to identifying and implementing business solutions that enable teams to deliver superior products, content and service to clients.")),
+                                    box(title = "Patrick Kurz", width = 4, img(class="img-circle", src="/images/patrick.png", alt="", width = 200), 
+                                        br(""),
+                                        p("Data loving and collaborative leader that enjoys team-based environments dedicated to identifying and implementing business solutions that enable teams to deliver superior products, content and service to clients."))
+                                    ),
                       
                                 
-                                
-                                div(
-                                  h1("About the project"),
-                                  br(),
-                                  h2("About the data set"),
-                                  h3("General Information"),
-                                  h3("Column description"),
-                                  br(),
-                                  h2("About the algorithm"),
-                                  br(),
-                                  h2("About data preparation"),
-                                  
-                                  br(),
-                                  h2("About the team")),
-
-                                
-                                  div(class ="container", 
-                                    div(class ="row",
-                                      div(class="col-md-12"),
-                                        h1(class="title fit-h1","Who we are?")),
-                                    div(class="marketing"),
-                                      div(class="row",
-                                        div(class="col-md-4",
-                                          img(class="img-circle", src="/images/leandra.png", alt="", width = 200),
-                                          h2("Leandra Sommer"),
-                                          code("Data loving and collaborative leader that enjoys team-based environments dedicated to identifying and implementing business solutions that enable teams to deliver superior products, content and service to clients."),
-                                          a(href="https://www.linkedin.com/in/patrick-kurz-85b73813b")),
-                                        div(class="col-md-4",
-                                          img(class="img-circle", src="/images/michele.png", alt="", width = 200),
-                                          h2("Michele Candolfo"),
-                                          code("Data loving and collaborative leader that enjoys team-based environments dedicated to identifying and implementing business solutions that enable teams to deliver superior products, content and service to clients."),
-                                          a(href="https://www.linkedin.com/in/michele-candolfo-175087152")),
-                                        div(class="col-md-4",
-                                          img(class="img-circle", src="/images/patrick.png", alt="", width = 200),
-                                          h2("Patrick Kurz"),
-                                          code("Data loving and collaborative leader that enjoys team-based environments dedicated to identifying and implementing business solutions that enable teams to deliver superior products, content and service to clients."),
-                                          a(href="https://www.linkedin.com/in/patrick-kurz-85b73813b")),
-                                      ),
-                                  #add custom style css
-                                  tags$head(
-                                  tags$link(rel = "stylesheet", 
-                                            type = "text/css", 
-                                            href = "/carousel.css"),
-                                  #tags$script(src = "/holder.js")
-                                  ),
-                                  tags$style(type="text/css"
-                                  ) 
-                        )
                       )
                     )
 ))
