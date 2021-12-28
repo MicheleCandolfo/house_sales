@@ -61,7 +61,7 @@ ui <- dashboardPage(skin = "midnight",
                                               #border-radius: 5px;"),
                         
                         div( h3("You like to know how much your real estate in King County is worth?"), 
-                             h3("You are just one click away from a precise prediciton based on AI!"),
+                             h3("You are just one click away from a precise prediction based on AI!"),
                              p(" "),
                            style = "position: absolute;
                                               top: 16.5%;
