@@ -337,7 +337,7 @@ server <- function(input, output, session) {
     output$int_map <- renderLeaflet({
         data <- dplyr::select(house_prices, price, lat, long, zipcode)
         coordinates_data <- subset(data, data$zipcode == input$zip)
-        pal = colorNumeric("YlOrRd", domain = coordinates_data$price)
+        pal = colorNumeric("Spectral", domain = coordinates_data$price)
         coordinates_data %>%
             leaflet()%>%
             addProviderTiles(providers$OpenStreetMap.Mapnik)%>%

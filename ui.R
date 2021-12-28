@@ -349,10 +349,33 @@ ui <- dashboardPage(skin = "midnight",
                         # Fifth tab content
                         #-----------------------------------------------------------------
                         tabItem(tabName = "About",
-                                box(title = "About the project", width = 12),
-                                box(title = "About the data set", width = 12),
+                                box(title = "About the project", width = 12,
+                                    "This project is basically about house price estimation/prediction based on house sales in King County, USA. We will use the programming language R and a specific data set from Kaggle.com. We also will use a ML algo for the predicition."),
+                                box(title = "About the data set", width = 12,
+                                    "Online property companies offer valuations of houses using machine learning techniques. The aim of this report is to predict the house sales in King County, Washington State, USA using Multiple Linear Regression (MLR). The dataset consisted of historic data of houses sold between May 2014 to May 2015."),
                                 box(title = "General Information", width = 12),
-                                box(title = "Column description", width = 12),
+                                box(title = "Column description", width = 12,
+                                    "id - Unique ID for each home sold
+                                    date - Date of the home sale
+                                    price - Price of each home sold
+                                    bedrooms - Number of bedrooms
+                                    bathrooms - Number of bathrooms, where .5 accounts for a room with a toilet but no shower
+                                    sqft_living - Square footage of the apartments interior living space
+                                    sqft_lot - Square footage of the land space
+                                    floors - Number of floors
+                                    waterfront - A dummy variable for whether the apartment was overlooking the waterfront or not
+                                    view - An index from 0 to 4 of how good the view of the property was
+                                    condition - An index from 1 to 5 on the condition of the apartment,
+                                    grade - An index from 1 to 13, where 1-3 falls short of building construction and design, 7 has an average level of construction and design, and 11-13 have a high quality level of construction and design.
+                                    sqft_above - The square footage of the interior housing space that is above ground level
+                                    sqft_basement - The square footage of the interior housing space that is below ground level
+                                    yr_built - The year the house was initially built
+                                    yr_renovated - The year of the house's last renovation
+                                    zipcode - What zipcode area the house is in
+                                    lat - Lattitude
+                                    long - Longitude
+                                    sqft_living15 - The square footage of interior housing living space for the nearest 15 neighbors
+                                    sqft_lot15 - The square footage of the land lots of the nearest 15 neighbors"),
                                 box(title = "About the algorithm", width = 12),
                                 box(title = "About data preparation", width = 12),
                                 box(title = "About the team - Who we are?", width = 12,
@@ -364,7 +387,30 @@ ui <- dashboardPage(skin = "midnight",
                                         p("Data loving and collaborative leader that enjoys team-based environments dedicated to identifying and implementing business solutions that enable teams to deliver superior products, content and service to clients.")),
                                     box(title = "Patrick Kurz", width = 4, img(class="img-circle", src="/images/patrick.png", alt="", width = 200), 
                                         br(""),
-                                        p("Data loving and collaborative leader that enjoys team-based environments dedicated to identifying and implementing business solutions that enable teams to deliver superior products, content and service to clients."))
+                                        p("Data loving and collaborative leader that enjoys team-based environments dedicated to identifying and implementing business solutions that enable teams to deliver superior products, content and service to clients.")),
+                                   
+                                    
+                                    userBox(title = userDescription(
+                                      title = "Max Muster",
+                                      subtitle = "Chief",
+                                      type = 1,
+                                      image = "https://adminlte.io/themes/AdminLTE/dist/img/user7-128x128.jpg",
+                                      
+                                    ),width = 5),
+                                    userBox(title = userDescription(
+                                      title = "Max Muster",
+                                      subtitle = "Chief",
+                                      type = 1,
+                                      image = "https://adminlte.io/themes/AdminLTE/dist/img/user7-128x128.jpg",
+                                      
+                                    ),width = 10),
+                                    userBox(title = userDescription(
+                                      title = "Max Muster",
+                                      subtitle = "Chief",
+                                      type = 1,
+                                      image = "https://adminlte.io/themes/AdminLTE/dist/img/user7-128x128.jpg",
+                                      
+                                    ),width = 5)
                                     ),
                       
                                 
