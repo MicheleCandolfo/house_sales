@@ -317,6 +317,7 @@ ui <- dashboardPage(skin = "midnight",
                                     h1("Result of the predicition"),
                                     hr(),
                                     verbatimTextOutput("value")
+                                
                                     
                                 )
                         ),
@@ -378,7 +379,7 @@ ui <- dashboardPage(skin = "midnight",
                                 box(title = "About the algorithm", width = 12),
                                 box(title = "About data preparation", width = 12),
                                 box(title = "About the team - Who we are?", width = 12,
-                                    box(title = "Leandra Sommer", width = 4, img(class="img-circle", src="/images/leandra.png", alt="", width = 200),
+                                    box(title = "Leandra Sommer", width = 4, img(class="img-circle", src="/images/lele.jpg", alt="", width = 200),
                                         br(""),
                                         p("Data loving and collaborative leader that enjoys team-based environments dedicated to identifying and implementing business solutions that enable teams to deliver superior products, content and service to clients.")),
                                     box(title = "Michele Candolfo", width = 4, img(class="img-circle", src="/images/michele.JPG", alt="", width = 200),
