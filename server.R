@@ -202,16 +202,59 @@ server <- function(input, output, session) {
     })
     
     #Plot for dashboard
+    waterfrontValues <- list(
+      '0'="No Waterfront",
+      '1'="Waterfront"
+    )
     
+      
+      waterfront_labeller <- function(variable,value){
+        return(waterfrontValues[value])
+      }
+      renovatedValues <- list(
+        '0'="Not renovated",
+        '1'="Renovated"
+      )
+      
+      
+      renovated_labeller <- function(variable,value){
+        return(renovatedValues[value])
+      }
 
-    
+  
     output$plot1 <- renderPlot({
-      house_prices4 %>%
-        ggplot( aes(x=sqm_living, y=price, group=waterfront, color=waterfront)) +
-        geom_line()+
-        scale_y_continuous(labels = scales::comma)+
-        scale_y_continuous(labels = scales::dollar)
-    })
+      if (input$plotDashboard == "waterfront") {
+        house_prices4 %>%
+          ggplot( aes(x=sqm_living, y=price, group=waterfront, color=waterfront)) +
+          geom_point()+
+          facet_wrap( ~ waterfront, labeller = waterfront_labeller)+
+          scale_y_continuous(labels = scales::comma)+
+          scale_y_continuous(labels = scales::dollar)+
+          # theme_classic()+
+          theme_grey()+
+          theme(legend.position="none", strip.text.x = element_text(size = 12))
+      } else if (input$plotDashboard == "renovated") {
+        house_prices4 %>%
+          ggplot( aes(x=sqm_living, y=price, group=renovated, color=renovated)) +
+          geom_point()+
+          facet_wrap( ~ renovated, labeller = renovated_labeller)+
+          scale_y_continuous(labels = scales::comma)+
+          scale_y_continuous(labels = scales::dollar)+
+          theme_grey()+
+          theme(legend.position="none", strip.text.x = element_text(size = 12))
+      } else {
+        house_prices4 %>%
+          ggplot( aes(x=sqm_living, y=price, group=yearb, color=yearb)) +
+          geom_point()+
+          facet_wrap( ~ yearb)+
+          scale_y_continuous(labels = scales::comma)+
+          scale_y_continuous(labels = scales::dollar)+
+          theme_grey()+
+          theme(legend.position="none", strip.text.x = element_text(size = 12))
+      }
+      })
+      
+     
     
   
     

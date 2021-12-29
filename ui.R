@@ -212,16 +212,15 @@ ui <- dashboardPage(skin = "midnight",
                                      
                                    )
                                 ),
-                               box(title = "please mark a variable ", 
-                                   width = 12
+                               box(title = "Overview ", 
+                                   width = 12, 
+                                   selectInput("plotDashboard", label = h3("Please check a variable for the plot"), 
+                                               choices = list("Waterfront" = "waterfront", "Renovated" = "renovated", "Year built" = "yearb"), 
+                                   ),
+                                   plotOutput("plot1", click = "plot_click")
                                  
                                ),
-                               box(
-                                   width = 12,
-                                   
-                                   plotOutput("plot1", click = "plot_click")
-                                   
-                                   )
+                               
                                
                         ),
                         
