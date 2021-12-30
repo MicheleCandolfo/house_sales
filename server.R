@@ -384,7 +384,7 @@ server <- function(input, output, session) {
         coordinates_data %>%
             leaflet()%>%
             addProviderTiles(providers$OpenStreetMap.Mapnik)%>%
-            addCircleMarkers(col = ~pal(price), opacity = 1.1, radius = 0.3) %>% 
+            addCircleMarkers(col = ~pal(price), opacity = 1.1, radius = 0.5) %>% 
             addLegend(pal = pal, values = ~price)
     })
 }
