@@ -227,11 +227,8 @@ ui <- dashboardPage(skin = "midnight",
                         # Third tab content
                         #-----------------------------------------------------------------
                         tabItem(tabName = "Prediction",
-                                h2("Prediction"),
-                                
-                                box(width = 3,
-                                    h1("Enter your values"),
-                                    hr(),
+
+                                box(width = 3, title = h2("Enter values"),
                                   numericInput("sqm_liv", label = h3("Living space (in qm)"), value = 0, min= 1), #sqm_live will be sent to the server
                                   selectizeInput("grade", label = h3("Grade"), 
                                               choices = list("1","2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"), #grade will be sent to the server
@@ -264,9 +261,7 @@ ui <- dashboardPage(skin = "midnight",
                             
                                 ),
                                 
-                                box(width = 9, 
-                                  h1("Predicition"),
-                                  hr(),
+                                box(width = 9, title = h2("Prediction"),
                                   h3("Check your inputs:"),
                                   #Prediciton is generated from the server 
                                   infoBoxOutput("ibox0"),
@@ -280,19 +275,10 @@ ui <- dashboardPage(skin = "midnight",
                                   infoBoxOutput("ibox8"),
                                   infoBoxOutput("ibox9"),
                                   infoBoxOutput("ibox10"),
-          
-                                  
-                                  
-                                  box(width = 4,
-                                    h2()
-                                    ),
-                                  
-                                  box(width = 4,
-                                    h2(),
-                                    actionButton("action_prediction", label = "Predict",
+                                  actionButton("action_prediction", label = "Predict",
                                                  style = "position: absolute;
-                                              top: 45%;
-                                              left: 50%;
+                                              top: 92%;
+                                              left: 91%;
                                               transform: translate(-50%, -50%);
                                               -ms-transform: translate(-50%, -50%);
                                               background-color: rgba(0, 191, 255);
@@ -303,19 +289,12 @@ ui <- dashboardPage(skin = "midnight",
                                               cursor: pointer;
                                               border-radius: 5px;"
                                                  
-                                    )),
+                                    )
                                   
-                                  box(width = 4,
-                                      h2()
-                                      
-                                      )
-                                  
-                                  
+
                                 ),
                                 
-                                box(width = 9, 
-                                    h1("Result of the predicition"),
-                                    hr(),
+                                box(width = 9, title = h2("Result of the predicition"),
                                     h3(uiOutput("value"))
                                 
                                     

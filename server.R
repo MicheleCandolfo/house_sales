@@ -286,9 +286,9 @@ server <- function(input, output, session) {
     
     output$ibox0 <- renderInfoBox({
       infoBox(
-        "Sqm living",
+        "Living space",
         input$sqm_liv,
-        icon = icon("credit-card")
+        icon = icon("home")
       )
     })
     
@@ -296,7 +296,7 @@ server <- function(input, output, session) {
       infoBox(
         "Grade",
         input$grade,
-        icon = icon("credit-card")
+        icon = icon("check-circle")
       )
     })
     
@@ -304,7 +304,7 @@ server <- function(input, output, session) {
       infoBox(
         "Bathrooms",
         input$bathrooms,
-        icon = icon("credit-card")
+        icon = icon("toilet")
       )
     })
     
@@ -312,7 +312,7 @@ server <- function(input, output, session) {
       infoBox(
         "Zip Code",
         input$zipCodePre,
-        icon = icon("credit-card")
+        icon = icon("map")
       )
     })
     
@@ -320,7 +320,7 @@ server <- function(input, output, session) {
       infoBox(
         "Year Built",
         input$yearb,
-        icon = icon("credit-card")
+        icon = icon("building")
       )
     })
     
@@ -328,7 +328,7 @@ server <- function(input, output, session) {
       infoBox(
         "Bedrooms",
         input$bedrooms,
-        icon = icon("credit-card")
+        icon = icon("bed")
       )
     })
     
@@ -336,7 +336,7 @@ server <- function(input, output, session) {
       infoBox(
         "Floors",
         input$floors,
-        icon = icon("credit-card")
+        icon = icon("arrow-alt-circle-up")
       )
     })
     
@@ -344,7 +344,7 @@ server <- function(input, output, session) {
       infoBox(
         "Condition",
         input$condition,
-        icon = icon("credit-card")
+        icon = icon("balance-scale")
       )
     })
     
@@ -352,7 +352,7 @@ server <- function(input, output, session) {
       infoBox(
         "Waterfront",
         input$waterfront,
-        icon = icon("credit-card")
+        icon = icon("water")
       )
     })
     
@@ -360,14 +360,14 @@ server <- function(input, output, session) {
       infoBox(
         "Basement",
         input$basement, 
-        icon = icon("credit-card")
+        icon = icon("arrow-alt-circle-down")
       )
     })
     output$ibox10 <- renderInfoBox({
       infoBox(
         "Renovated",
         input$renovated,
-        icon = icon("credit-card")
+        icon = icon("hammer")
       )
     })
     
