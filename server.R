@@ -259,7 +259,7 @@ server <- function(input, output, session) {
   
     
     #Prediciton page info boxes---------------------------------------------------------
-    output$value <- renderPrint({ input$action_predictions
+    output$value <- renderUI({ input$action_predictions
       bedrooms <- input$bedrooms
       bathrooms <- input$bathrooms
       waterfront <- input$waterfront
@@ -281,7 +281,7 @@ server <- function(input, output, session) {
       se.method = "infjack",
       verbose = TRUE,
     )
-    userPrediction$predictions
+    round(userPrediction$predictions)
     })
     
     output$ibox0 <- renderInfoBox({

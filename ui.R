@@ -232,11 +232,11 @@ ui <- dashboardPage(skin = "midnight",
                                 box(width = 3,
                                     h1("Enter your values"),
                                     hr(),
-                                  numericInput("sqm_liv", label = h3("sqm_living"), value = 0, min= 1), #sqm_live will be sent to the server
+                                  numericInput("sqm_liv", label = h3("Living space (in qm)"), value = 0, min= 1), #sqm_live will be sent to the server
                                   selectizeInput("grade", label = h3("Grade"), 
                                               choices = list("1","2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"), #grade will be sent to the server
                                               ),
-                                  numericInput("bathrooms", label = h3("bathrooms"), value = 0.5, min= 0,5), #bathrooms will be sent to the server
+                                  numericInput("bathrooms", label = h3("Bathrooms"), value = 0.5, min= 0,5), #bathrooms will be sent to the server
                                   selectizeInput("zipCodePre",label = h3("Zipcode"), #zipCodePre will be sent to the server
                                                  choices= c("98178", "98125","98028", "98136", "98074", "98053", "98003", "98198", "98146" )),
                                  
@@ -267,7 +267,7 @@ ui <- dashboardPage(skin = "midnight",
                                 box(width = 9, 
                                   h1("Predicition"),
                                   hr(),
-                                  h3("Check you inputs:"),
+                                  h3("Check your inputs:"),
                                   #Prediciton is generated from the server 
                                   infoBoxOutput("ibox0"),
                                   infoBoxOutput("ibox1"),
@@ -316,7 +316,7 @@ ui <- dashboardPage(skin = "midnight",
                                 box(width = 9, 
                                     h1("Result of the predicition"),
                                     hr(),
-                                    verbatimTextOutput("value")
+                                    h3(uiOutput("value"))
                                 
                                     
                                 )
@@ -397,38 +397,19 @@ ui <- dashboardPage(skin = "midnight",
                                 box(title = "About the team - Who we are?", width = 12,
                                     p("Our great team consists of 3 people."),
                                     p("We are all students at Aalen University in the first semester of the part-time Master of Science. We have all completed our Bachelor of Science at the Cooperative State University Baden-Württemberg in Business Informatics."),
-                                    box(title = h4("Leandra Sommer", align="center"), align="center", width = 4, img(class="img-circle", src="/images/lele.jpg", alt="", width = 200),
+                                    box(title = h3("Leandra Sommer", align="center"), align="center", width = 4, img(class="img-circle", src="/images/lele.jpg", alt="", width = 200),
                                         br(""),
                                         p("Data loving and collaborative leader that enjoys team-based environments dedicated to identifying and implementing business solutions that enable teams to deliver superior products, content and service to clients.")),
-                                    box(title = h4("Michele Candolfo", align="center"), align="center", width = 4, img(class="img-circle", src="/images/michele.JPG", alt="", width = 200),
+                                    box(title = h3("Michele Candolfo", align="center"), align="center", width = 4, img(class="img-circle", src="/images/michele.JPG", alt="", width = 200),
                                         br(""),
                                         p("Data loving and collaborative leader that enjoys team-based environments dedicated to identifying and implementing business solutions that enable teams to deliver superior products, content and service to clients.")),
-                                    box(title = h4("Patrick Kurz", align="center"), align="center",  width = 4, img(class="img-circle", src="/images/patrick.png", alt="", width = 200), 
+                                    box(title = h3("Patrick Kurz", align="center"), align="center",  width = 4, img(class="img-circle", src="/images/patrick.png", alt="", width = 200), 
                                         br(""),
-                                        p("The team's project manager with a professional background in the banking industry. Mainly works for Mercedes-Benz AG as a product owner for digital services. Has been studying for a Master's degree in Data Science & Business Analytics at Aalen University since September 2021.")),
+                                        p("The team's project manager with a professional background in the banking industry. Mainly works for Mercedes-Benz AG as a product owner for digital services. Has been studying for a Master's degree in Data Science & Business Analytics at Aalen University since September 2021."))
                                    
                                     
-                                    userBox(title = userDescription(
-                                      title = "Max Muster",
-                                      subtitle = "Chief",
-                                      type = 1,
-                                      image = "https://adminlte.io/themes/AdminLTE/dist/img/user7-128x128.jpg",
-                                      
-                                    ),width = 5),
-                                    userBox(title = userDescription(
-                                      title = "Max Muster",
-                                      subtitle = "Chief",
-                                      type = 1,
-                                      image = "https://adminlte.io/themes/AdminLTE/dist/img/user7-128x128.jpg",
-                                      
-                                    ),width = 10),
-                                    userBox(title = userDescription(
-                                      title = "Max Muster",
-                                      subtitle = "Chief",
-                                      type = 1,
-                                      image = "https://adminlte.io/themes/AdminLTE/dist/img/user7-128x128.jpg",
-                                      
-                                    ),width = 5)
+
+
                                     ),
                       
                                 
