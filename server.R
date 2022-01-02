@@ -62,8 +62,6 @@ server <- function(input, output, session) {
     
     house_prices4$sqm_basement <- round(house_prices4$sqft_basement *qm)
     
-    
-    
     #drop sqft columns
     house_prices4[,c("sqft_living","sqft_lot","sqft_above","sqft_basement","sqft_lot15","sqft_living15")] <- list(NULL)
     
@@ -253,6 +251,17 @@ server <- function(input, output, session) {
           theme(legend.position="none", strip.text.x = element_text(size = 12))
       }
       })
+    
+    #Button landingpage-----------------------
+    observeEvent(input$switchtab, {
+      newtab <- switch(input$tabs,
+                       "Home" = "Prediction",
+                       "Prediction" = "Home"
+      )
+      updateTabItems(session, "tabs", newtab)
+    })
+    
+    #End button landingpage-------------------
       
      
     

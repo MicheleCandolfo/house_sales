@@ -17,7 +17,7 @@ ui <- dashboardPage(skin = "midnight",
                       img(src = "/images/house_icon.png",
                           style = "height: auto; width: 180%"))),
                       dashboardSidebar(collapsed = TRUE,
-                                     sidebarMenu(
+                                     sidebarMenu(id = "tabs",
                                        menuItem("Home", tabName = "Home", icon = icon("home")),
                                        menuItem("Dashboard", tabName = "Dashboard", icon = icon("tachometer-alt")),
                                        menuItem("Prediction", tabName = "Prediction", icon = icon("chart-line")),
@@ -62,34 +62,56 @@ ui <- dashboardPage(skin = "midnight",
                         
                         div( h3("You like to know how much your real estate in King County is worth?"), 
                              h3("You are just one click away from a precise prediction based on AI!"),
-                             p(" "),
+                             h3(" "),
                            style = "position: absolute;
-                                              top: 16.5%;
-                                              left: 45%;
+                                              top: 18%;
+                                              left: 50%;
                                               transform: translate(-50%, -50%);
                                               -ms-transform: translate(-50%, -50%);
                                               background-color: rgba(255, 255, 255,0.45);
                                               color: black;
                                               font-size: 16px;
-                                              padding: 12px 24px;
-                                              border: none;
-                                              cursor: pointer;
-                                              border-radius: 5px;"),
-                        img(src = "/images/giphy.gif",
-                            style = "position: absolute;
-                                              top: 16.5%;
-                                              left: 10%;
-                                              transform: translate(-50%, -50%);
-                                              -ms-transform: translate(-50%, -50%);
-                                              #background-color: rgba(255, 255, 255,0.45);
-                                              color: black;
-                                              font-size: 16px;
-                                              padding: 12px 24px;
+                                              padding: 10px 10px;
                                               border: none;
                                               cursor: pointer;
                                               border-radius: 5px;
-                                              height: 200px;
-                                              width: 300px;                  "),
+                                              width: 750px;
+                                              height: 200;",
+                           actionButton('switchtab', 'Prediction',
+                                        style = "position: relative;
+                                              top: 29%;
+                                              left: 45%;
+                                              #transform: translate(-50%, -50%);
+                                              #-ms-transform: translate(-50%, -50%);
+                                              background-color: rgba(0, 191, 255,0.7);
+                                              color: white;
+                                              font-size: 20px;
+                                              padding: 12px 24px;
+                                              border: none;
+                                              cursor: pointer;
+                                              border-radius: 5px;"
+                                        
+                           )
+                           
+                           
+                           
+                           ),
+                        #img(src = "/images/giphy.gif",
+                          #  style = "position: absolute;
+                                              #top: 16.5%;
+                                              #left: 10%;
+                                              #transform: translate(-50%, -50%);
+                                              #-ms-transform: translate(-50%, -50%);
+                                              #background-color: rgba(255, 255, 255,0.45);
+                                              #color: black;
+                                              #font-size: 16px;
+                                              #padding: 12px 24px;
+                                              #border: none;
+                                              #cursor: pointer;
+                                              #border-radius: 5px;
+                                              #height: 200px;
+                                              #width: 300px;                  "),
+                        
                         
                       ),
                                 
