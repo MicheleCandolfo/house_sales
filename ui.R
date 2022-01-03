@@ -252,9 +252,10 @@ ui <- dashboardPage(skin = "midnight",
 
                                 box(width = 3, title = h2("Enter values"),
                                   numericInput("sqm_liv", label = h3("Living space (in sqm)"), value = 0, min= 1), #sqm_live will be sent to the server
-                                  selectizeInput("grade", label = h3("Grade"), 
+                                  selectizeInput("grade", label = h3("Building Grade"), 
                                               choices = list("1","2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"), #grade will be sent to the server
                                               ),
+                                  tippy("Information about grade", tooltip = "Index from 1 to 13, with 1-3 representing poor construction and design, 7 representing average construction and design, and 11-13 representing high quality construction and design; You can find more information on the information page"),
                                   numericInput("bathrooms", label = h3("Bathrooms"), value = 0.5, min= 0,5), #bathrooms will be sent to the server
                                   selectizeInput("zipCodePre",label = h3("Zipcode"), #zipCodePre will be sent to the server
                                                  choices= c("98178", "98125","98028", "98136", "98074", "98053", "98003", "98198", "98146", "98038", "98007", "98115", "98126", "98019", "98103", "98002", "98133", "98040", "98092",
@@ -268,9 +269,10 @@ ui <- dashboardPage(skin = "midnight",
                                               max = 20, value = 4),
                                   sliderInput("floors", label = h3("Floors"), min = 0, #floors will be sent to the server
                                               max = 5, value = 2),
-                                  selectizeInput("condition", label = h3("Condition"),#condition will be sent to the server
+                                  selectizeInput("condition", label = h3("Building Condition"),#condition will be sent to the server
                                                  choices = c("1","2", "3", "4", "5")),
-                                  tippy("Information about condition", tooltip = "1-3: schlecht, 4: beseer, 5: noch besser, 6: noch besser, 7: noch besser, 8: noch bessser, 9: noch besser, 10: noch besser, 11: noch besser, 12: noch besser, 13: noch besser "),
+                                  tippy("Information about condition", tooltip = "1: Poor, 2: Fair, 3: Average, 4: Good, 5: Very good;
+                                        You can find more information on the information page"),
                                   hr(),
                                   selectInput("waterfront", label = h3("Waterfront"), 
                                               choices = list("Yes" = TRUE, "No" = FALSE), #Waterfront will be sent to the server
@@ -319,7 +321,7 @@ ui <- dashboardPage(skin = "midnight",
 
                                 ),
                                 
-                                box(width = 9, title = h2("Result of the predicition"),
+                                box(width = 9, title = h2("Result of the predicition in $"),
                                     h3(uiOutput("value"))
                                 
                                     
@@ -387,6 +389,30 @@ ui <- dashboardPage(skin = "midnight",
                                     p("long - Longitude"),
                                     p("sqft_living15 - The square footage of interior housing living space for the nearest 15 neighbors"),
                                     p("sqft_lot15 - The square footage of the land lots of the nearest 15 neighbors")),
+                                
+                                box(title = "Details about building grade and building condition", width = 12, collapsible = TRUE, collapsed = TRUE,
+                                    p("Building grade"),
+                                    p("1-3: Falls short of minimum building standards. Normally cabin or inferior structure. "),
+                                    p("4: Generally older, low quality construction. Does not meet code."),
+                                    p("5: Low construction costs and workmanship. Small, simple design."),
+                                    p("6: Lowest grade currently meeting building code. Low quality materials and simple designs."),
+                                    p("7: Average grade of construction and design. Commonly seen in plats and older sub-divisions."),
+                                    p("8: Just above average in construction and design. Usually better materials in both the exterior and interior finish work."),
+                                    p("9: Better architectural design with extra interior and exterior design and quality."),
+                                    p("10: Homes of this quality generally have high quality features. Finish work is better and more design quality is seen in the floor plans. Generally have a larger square footage."),
+                                    p("11: Custom design and higher quality finish work with added amenities of solid woods, bathroom fixtures and more luxurious options. "),
+                                    p("12: Custom design and excellent builders. All materials are of the highest quality and all conveniences are present "),
+                                    p("13: Generally custom designed and built. Mansion level. Large amount of highest quality cabinet work, wood trim, marble, entry ways etc. "),
+                                    hr(),
+                                    p("Building condition"), 
+                                    p("1: Poor- Worn out. Repair and overhaul needed on painted surfaces, roofing, plumbing, heating and numerous functional inadequacies. Excessive deferred maintenance and abuse, limited value-in-use, approaching abandonment or major reconstruction; reuse or change in occupancy is imminent. Effective age is near the end of the scale regardless of the actual chronological age. "),
+                                    p("2: Fair- Badly worn. Much repair needed. Many items need refinishing or overhauling, deferred maintenance obvious, inadequate building utility and systems all shortening the life expectancy and increasing the effective age."),
+                                    p("3: Average- Some evidence of deferred maintenance and normal obsolescence with age in that a few minor repairs are needed, along with some refinishing. All major components still functional and contributing toward an extended life expectancy. Effective age and utility is standard for like properties of its class and usage."),
+                                    p("4: Good- No obvious maintenance required but neither is everything new. Appearance and utility are above the standard and the overall effective age will be lower than the typical property."),
+                                    p("5: Very Good- All items well maintained, many having been overhauled and repaired as they have shown signs of wear, increasing the life expectancy and lowering the effective age with little deterioration or obsolescence evident with a high degree of utility. ")
+                              
+                                    ),
+                                
                                 box(title = "General information", width = 12, collapsible = TRUE, collapsed = TRUE,
                                     p("On the dashboard page you will find key facts about the data set as well as a visualised overview of the sales prices based on the most relevant parameters."),
                                     p("In the Prediction section, you will receive a prediction of how much your real estate is worth in King County based on your input. To do this, enter all the relevant information about your real estate and let the system calculate the value for you."),
