@@ -316,7 +316,22 @@ ui <- dashboardPage(skin = "midnight",
                                               cursor: pointer;
                                               border-radius: 5px;"
                                                  
-                                    )
+                                    ), 
+                                  actionButton("clear_prediction", label = "Clear",
+                                               style = "position: absolute;
+                                              top: 92%;
+                                              left: 80%;
+                                              transform: translate(-50%, -50%);
+                                              -ms-transform: translate(-50%, -50%);
+                                              background-color: rgba(0, 191, 255);
+                                              color: white;
+                                              font-size: 16px;
+                                              padding: 12px 24px;
+                                              border: none;
+                                              cursor: pointer;
+                                              border-radius: 5px;"
+                                               
+                                  )
                                   
 
                                 ),
@@ -358,7 +373,7 @@ ui <- dashboardPage(skin = "midnight",
                         # Fifth tab content
                         #-----------------------------------------------------------------
                         tabItem(tabName = "About",
-                                box(title = "About the project", width = 12, collapsible = TRUE, collapsed = FALSE,
+                                box(title = "About the project", width = 12, collapsible = TRUE, collapsed = TRUE,
                                     p("This project involves building a Shiny Web application in RStudio as part of a project work in the Master's programme at Aalen University."),
                                     p("The Shiny Web Application is basically about house price estimation/prediction based on house sales in King County, USA. We will use the programming language R and a specific data set from Kaggle.com. We also will use a machine learning algorithm (Random Forest) for the predicition.")),
                                 box(title = "About the data set", width = 12, collapsible = TRUE, collapsed = TRUE,
@@ -413,12 +428,12 @@ ui <- dashboardPage(skin = "midnight",
                               
                                     ),
                                 
-                                box(title = "General information", width = 12, collapsible = TRUE, collapsed = FALSE,
+                                box(title = "General information", width = 12, collapsible = TRUE, collapsed = TRUE,
                                     p("On the dashboard page you will find key facts about the data set as well as a visualised overview of the sales prices based on the most relevant parameters."),
                                     p("In the Prediction section, you will receive a prediction of how much your real estate is worth in King County based on your input. To do this, enter all the relevant information about your real estate and let the system calculate the value for you."),
                                     p("Do you want to find out at a glance what the house prices are like in individual regions in King County? Then our Map is the right place for you!"),
                                     p("Our About page describes our project, the data used and introduces our project team.")),
-                                box(title = "About the algorithm", width = 12, collapsible = TRUE, collapsed = FALSE,
+                                box(title = "About the algorithm", width = 12, collapsible = TRUE, collapsed = TRUE,
                                     p("For the price prediction we used the machine learning method Random Forest. We used training and test data for this. The performance of our prediction is around 83%. We evaluated the following variables as relevant for the prediction:")),
                                 box(title = "About data preparation", width = 12, collapsible = TRUE, collapsed = TRUE,
                                     p("Bedrooms records with zero values are removed. Record with the number of 33 bedrooms is adjusted to 3 bedrooms as we assume this is a typo."),

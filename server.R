@@ -276,6 +276,7 @@ server <- function(input, output, session) {
       
       
     })
+    observeEvent(input$action_prediction,{
     output$value <- renderUI({ 
       bedrooms <- input$bedrooms
       bathrooms <- input$bathrooms
@@ -299,6 +300,13 @@ server <- function(input, output, session) {
       verbose = TRUE,
     )
     round(userPrediction$predictions)
+    })
+    })
+    observeEvent(input$clear_prediction,{
+      output$value <- renderUI({ 
+      
+        0
+      })
     })
     
     output$ibox0 <- renderInfoBox({
@@ -395,7 +403,7 @@ server <- function(input, output, session) {
     
   
     output$int_map <- renderLeaflet({
-      data <- dplyr::select(house_prices, price, lat, long, zipcode)
+      data <- dplyr::select(house_prices4, price, lat, long, zipcode)
       coordinates_data <- subset(data, data$zipcode == input$zip)
       #data <- dplyr::select(house_prices, price, lat, long, zipcode, waterfront)
       #coordinates_data <- subset(data, data$zipcode == input$zip |  data$waterfront == input$waterfront)
