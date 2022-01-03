@@ -14,7 +14,8 @@ install.load::install_load(c("shiny",
                              "caTools", 
                              "yaml", 
                              "ranger", 
-                             "lubridate"
+                             "lubridate", 
+                             "ggdark"
                              
 ))
 
@@ -175,14 +176,14 @@ server <- function(input, output, session) {
     
     output$vbox4 <- renderValueBox({
       valueBox(
-        "Houses",
+        "Total of houses",
         ""
       )
     })
     
     output$vbox5 <- renderValueBox({
       valueBox(
-        "Mean QM",
+        "Mean sqm",
         ""
       )
     })
@@ -194,7 +195,7 @@ server <- function(input, output, session) {
     
     output$vbox6 <- renderValueBox({
       valueBox(
-        "$/QM",
+        "$/sqm",
         ""
       )
     })
@@ -226,29 +227,32 @@ server <- function(input, output, session) {
           ggplot( aes(x=sqm_living, y=price, group=waterfront, color=waterfront)) +
           geom_point()+
           facet_wrap( ~ waterfront, labeller = waterfront_labeller)+
-          scale_y_continuous(labels = scales::comma)+
           scale_y_continuous(labels = scales::dollar)+
+          xlab("Living space in square meter")+
+          ylab("Price")+
           # theme_classic()+
-          theme_grey()+
-          theme(legend.position="none", strip.text.x = element_text(size = 12))
+          dark_theme_gray(base_size = 18)+
+          theme(legend.position="none", strip.text.x = element_text(size = 16))
       } else if (input$plotDashboard == "renovated") {
         house_prices4 %>%
           ggplot( aes(x=sqm_living, y=price, group=renovated, color=renovated)) +
           geom_point()+
           facet_wrap( ~ renovated, labeller = renovated_labeller)+
-          scale_y_continuous(labels = scales::comma)+
           scale_y_continuous(labels = scales::dollar)+
-          theme_grey()+
-          theme(legend.position="none", strip.text.x = element_text(size = 12))
+          xlab("Living space in square meter")+
+          ylab("Price")+
+          dark_theme_gray(base_size = 18)+
+          theme(legend.position="none", strip.text.x = element_text(size = 16))
       } else {
         house_prices4 %>%
           ggplot( aes(x=sqm_living, y=price, group=yearb, color=yearb)) +
           geom_point()+
           facet_wrap( ~ yearb)+
-          scale_y_continuous(labels = scales::comma)+
           scale_y_continuous(labels = scales::dollar)+
-          theme_grey()+
-          theme(legend.position="none", strip.text.x = element_text(size = 12))
+          xlab("Living space in square meter")+
+          ylab("Price")+
+          dark_theme_gray(base_size = 18)+
+          theme(legend.position="none", strip.text.x = element_text(size = 16))
       }
       })
     
@@ -267,8 +271,12 @@ server <- function(input, output, session) {
     
   
     
-    #Prediciton page info boxes---------------------------------------------------------
-    output$value <- renderUI({ input$action_predictions
+  #Prediciton page info boxes---------------------------------------------------------
+    start_prediction <- observeEvent(input$action_predictions,{
+      
+      
+    })
+    output$value <- renderUI({ 
       bedrooms <- input$bedrooms
       bathrooms <- input$bathrooms
       waterfront <- input$waterfront

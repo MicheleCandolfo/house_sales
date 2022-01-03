@@ -168,7 +168,7 @@ ui <- dashboardPage(skin = "midnight",
                                        class = "text-center",
                                        width = 4,
                                        valueBoxOutput("vbox3", width = 12),
-                                       
+                                      
                                      ),
                                      back = div(
                                        class = "text-center",
@@ -192,7 +192,7 @@ ui <- dashboardPage(skin = "midnight",
                                        class = "text-center",
                                        width= 4,
                                        h3(count(house_prices5)),
-                                       p("Houses"),
+                                       p("Total of houses"),
                                      )
                                      
                                    ),
@@ -210,7 +210,7 @@ ui <- dashboardPage(skin = "midnight",
                                        class = "text-center",
                                        width= 4,
                                        h3(round(mean(house_prices5$sqm_living))),
-                                       p("Mean QM"),
+                                       p("Mean square meter (sqm)"),
                                      )
                                      
                                    ), 
@@ -229,7 +229,7 @@ ui <- dashboardPage(skin = "midnight",
                                        class = "text-center",
                                        width= 4,
                                        h3(round(sum(house_prices5$price)/sum(house_prices5$sqm_living))),
-                                       p("$/QM"),
+                                       p("$/sqm"),
                                      )
                                      
                                    )
@@ -251,13 +251,16 @@ ui <- dashboardPage(skin = "midnight",
                         tabItem(tabName = "Prediction",
 
                                 box(width = 3, title = h2("Enter values"),
-                                  numericInput("sqm_liv", label = h3("Living space (in qm)"), value = 0, min= 1), #sqm_live will be sent to the server
+                                  numericInput("sqm_liv", label = h3("Living space (in sqm)"), value = 0, min= 1), #sqm_live will be sent to the server
                                   selectizeInput("grade", label = h3("Grade"), 
                                               choices = list("1","2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"), #grade will be sent to the server
                                               ),
                                   numericInput("bathrooms", label = h3("Bathrooms"), value = 0.5, min= 0,5), #bathrooms will be sent to the server
                                   selectizeInput("zipCodePre",label = h3("Zipcode"), #zipCodePre will be sent to the server
-                                                 choices= c("98178", "98125","98028", "98136", "98074", "98053", "98003", "98198", "98146" )),
+                                                 choices= c("98178", "98125","98028", "98136", "98074", "98053", "98003", "98198", "98146", "98038", "98007", "98115", "98126", "98019", "98103", "98002", "98133", "98040", "98092",
+                                                            "98030", "98119", "98112", "98052", "98027", "98117", "98058", "98107", "98001", "98056", "98166", "98023", "98070", "98148", "98105", "98042", "98008", "98059", "98122",
+                                                            "98144", "98004", "98005", "98034", "98075", "98116","98010", "98118", "98199", "98032", "98045", "98102", "98077", "98108", "98168", "98177", "98065", "98029", "98006",
+                                                            "98109", "98022", "98033", "98155", "98024", "98011", "98031", "98106", "98072", "98188", "98014", "98055", "98039" )),
                                  
                                   selectizeInput("yearb", label = h3("Year built"), #yearb will be sent to the server
                                               choices = c("1900-1950","1950-2000", "2000-2021")), 
@@ -329,7 +332,10 @@ ui <- dashboardPage(skin = "midnight",
                                 h2("Welcome to the Map"),
                                 box(width = 2,
                                   selectizeInput("zip","Zipcode", 
-                                                 choices= c("98178", "98125","98028", "98136", "98074", "98053", "98003", "98198", "98146" ), 
+                                                 choices= c("98178", "98125","98028", "98136", "98074", "98053", "98003", "98198", "98146", "98038", "98007", "98115", "98126", "98019", "98103", "98002", "98133", "98040", "98092",
+                                                            "98030", "98119", "98112", "98052", "98027", "98117", "98058", "98107", "98001", "98056", "98166", "98023", "98070", "98148", "98105", "98042", "98008", "98059", "98122",
+                                                            "98144", "98004", "98005", "98034", "98075", "98116","98010", "98118", "98199", "98032", "98045", "98102", "98077", "98108", "98168", "98177", "98065", "98029", "98006",
+                                                            "98109", "98022", "98033", "98155", "98024", "98011", "98031", "98106", "98072", "98188", "98014", "98055", "98039" ), 
                                   ),
                                   selectInput("waterfront", label = h3("Waterfront"), 
                                               choices = list("Yes" = TRUE, "No" = FALSE), #Waterfront will be sent to the server

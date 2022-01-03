@@ -86,6 +86,9 @@ house_prices4<-house_prices4 %>% filter(!is.na(yearb))
 #Choosing features
 house_prices5=house_prices4[,c("price","bedrooms","bathrooms","waterfront","condition","grade", "sqm_living", "basement","renovated", "zipcode", "yearb", "floors")]
 
+
+unique(house_prices5$zipcode)
+
 #Teilung der Daten Training und Test 
 set.seed(5) 
 sample <- sample.split(house_prices5, SplitRatio = .80)
@@ -101,8 +104,8 @@ predict=predict(model,test[,-1])
 
 postResample(test$price,predict)
 
-#importance(model)
-#varImpPlot(model,type=2)
+importance(model)
+varImpPlot(model,type=2)
 
 
 
