@@ -395,10 +395,13 @@ server <- function(input, output, session) {
     
   
     output$int_map <- renderLeaflet({
-        data <- dplyr::select(house_prices, price, lat, long, zipcode)
-        coordinates_data <- subset(data, data$zipcode == input$zip)
-        pal = colorNumeric("Spectral", domain = coordinates_data$price)
-        coordinates_data %>%
+      data <- dplyr::select(house_prices, price, lat, long, zipcode)
+      coordinates_data <- subset(data, data$zipcode == input$zip)
+      #data <- dplyr::select(house_prices, price, lat, long, zipcode, waterfront)
+      #coordinates_data <- subset(data, data$zipcode == input$zip |  data$waterfront == input$waterfront)
+      #coordinates_data1 <- subset(coordinates_data, coordinates_data$zipcode |  coordinates_data$waterfront == input$waterfront)
+      pal = colorNumeric("Spectral", domain = coordinates_data$price)
+      coordinates_data %>%
             leaflet()%>%
             addProviderTiles(providers$OpenStreetMap.Mapnik)%>%
             addCircleMarkers(col = ~pal(price), opacity = 1.1, radius = 0.5) %>% 
