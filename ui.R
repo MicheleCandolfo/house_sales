@@ -275,13 +275,13 @@ ui <- dashboardPage(skin = "midnight",
                                         You can find more information on the information page"),
                                   hr(),
                                   selectInput("waterfront", label = h3("Waterfront"), 
-                                              choices = list("Yes" = TRUE, "No" = FALSE), #Waterfront will be sent to the server
+                                              choices = list("Yes" = 1, "No" = 0), #Waterfront will be sent to the server
                                   ),
                                   selectInput("basement", label = h3("Basement"),
-                                              choices = list("Yes" = TRUE, "No" = FALSE), #Basement will be sent to the server
+                                              choices = list("Yes" = 1, "No" = 0), #Basement will be sent to the server
                                   ),
                                   selectInput("renovated", label = h3("Renovated"), 
-                                              choices = list("Yes" = TRUE, "No" = FALSE), #Renovated will be sent to the server
+                                              choices = list("Yes" = 1, "No" = 0), #Renovated will be sent to the server
                                   ),
                                   hr()
                                   
