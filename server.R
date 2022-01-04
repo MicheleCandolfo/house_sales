@@ -24,6 +24,16 @@ install.load::install_load(c("shiny",
 
 server <- function(input, output, session) {
     
+    #Button landingpage-----------------------
+    observeEvent(input$switchtab, {
+      newtab <- switch(input$tabs,
+                       "Home" = "Prediction",
+                       "Prediction" = "Home"
+      )
+      updateTabItems(session, "tabs", newtab)
+    })
+    
+    #End button landingpage-------------------
     
     #Load the data 
     house_prices <- read.csv("kc_house_data.csv")
@@ -256,16 +266,7 @@ server <- function(input, output, session) {
       }
       })
     
-    #Button landingpage-----------------------
-    observeEvent(input$switchtab, {
-      newtab <- switch(input$tabs,
-                       "Home" = "Prediction",
-                       "Prediction" = "Home"
-      )
-      updateTabItems(session, "tabs", newtab)
-    })
-    
-    #End button landingpage-------------------
+   
       
      
     

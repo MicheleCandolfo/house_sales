@@ -304,11 +304,11 @@ ui <- dashboardPage(skin = "midnight",
                                   infoBoxOutput("ibox10"),
                                   infoBox(title = "Information",subtitle = "Please click the clear button!" ),
                                   actionButton("action_prediction", label = "Predict",
-                                                 style = "#position: absolute;
-                                              #top: 92%;
-                                              #left: 91%;
-                                              transform: translate(-50%, -50%);
-                                              -ms-transform: translate(-50%, -50%);
+                                                 style = "position: relative;
+                                              top: 92%;
+                                              left: 88.5%;
+                                              #transform: translate(-50%, -50%);
+                                              #-ms-transform: translate(-50%, -50%);
                                               background-color: rgba(0, 191, 255);
                                               color: white;
                                               font-size: 16px;
@@ -319,11 +319,11 @@ ui <- dashboardPage(skin = "midnight",
                                                  
                                     ), 
                                   actionButton("clear_prediction", label = "Clear",
-                                               style = "#position: absolute;
-                                              #top: 92%;
-                                              #left: 77%;
-                                              transform: translate(-50%, -50%);
-                                              -ms-transform: translate(-50%, -50%);
+                                               style = "position: relative;
+                                              top: 92%;
+                                              left: 57.5%;
+                                              #transform: translate(-50%, -50%);
+                                              #-ms-transform: translate(-50%, -50%);
                                               background-color: rgba(0, 191, 255);
                                               color: white;
                                               font-size: 16px;
@@ -485,7 +485,7 @@ ui <- dashboardPage(skin = "midnight",
                                         p("Works for CDA IT Systems as a test manager and project manager in the area of postal logistics. Has been studying for a master's degree in business informatics at Aalen University since September 2021.")),
                                     box(title = h3("Michele Candolfo", align="center"), align="center", width = 4, img(class="img-circle", src="/images/michele.JPG", alt="", width = 200),
                                         br(""),
-                                        p("Data loving and collaborative leader that enjoys team-based environments dedicated to identifying and implementing business solutions that enable teams to deliver superior products, content and service to clients.")),
+                                        p("Works for TestGilde GmbH as a technical lead for test automation. Has been studying for a master's degree in business informatics at Aalen University since September 2021. ")),
                                     box(title = h3("Patrick Kurz", align="center"), align="center",  width = 4, img(class="img-circle", src="/images/patrick.png", alt="", width = 200), 
                                         br(""),
                                         p("The team's project manager with a professional background in the banking industry. Mainly works for Mercedes-Benz AG as a product owner for digital services. Has been studying for a Master's degree in Data Science & Business Analytics at Aalen University since September 2021."))
