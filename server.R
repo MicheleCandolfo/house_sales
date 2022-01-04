@@ -402,11 +402,9 @@ server <- function(input, output, session) {
     
   
     output$int_map <- renderLeaflet({
-      data <- dplyr::select(house_prices4, price, lat, long, zipcode)
+      data <- dplyr::select(house_prices4, price, lat, long, zipcode, waterfront, basement, renovated, grade, condition, yearb)
+      #coordinates_data <- subset(data, data$zipcode == input$zip & data$waterfront == input$waterfrontmap & data$basement == input$basementmap & data$renovated == input$renovatedmap & data$grade == input$grademap & data$condition == input$conditionmap & data$yearb == input$yearbmap)
       coordinates_data <- subset(data, data$zipcode == input$zip)
-      #data <- dplyr::select(house_prices, price, lat, long, zipcode, waterfront)
-      #coordinates_data <- subset(data, data$zipcode == input$zip |  data$waterfront == input$waterfront)
-      #coordinates_data1 <- subset(coordinates_data, coordinates_data$zipcode |  coordinates_data$waterfront == input$waterfront)
       pal = colorNumeric("Spectral", domain = coordinates_data$price)
       coordinates_data %>%
             leaflet()%>%
