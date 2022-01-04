@@ -272,11 +272,8 @@ server <- function(input, output, session) {
   
     
   #Prediciton page info boxes---------------------------------------------------------
-    start_prediction <- observeEvent(input$action_predictions,{
-      
-      
-    })
     observeEvent(input$action_prediction,{
+    #eventReactive(input$action_prediction, {
     output$value <- renderUI({ 
       bedrooms <- input$bedrooms
       bathrooms <- input$bathrooms
@@ -301,7 +298,9 @@ server <- function(input, output, session) {
     )
     round(userPrediction$predictions)
     })
+    
     })
+    
     observeEvent(input$clear_prediction,{
       output$value <- renderUI({ 
       

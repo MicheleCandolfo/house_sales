@@ -302,10 +302,11 @@ ui <- dashboardPage(skin = "midnight",
                                   infoBoxOutput("ibox8"),
                                   infoBoxOutput("ibox9"),
                                   infoBoxOutput("ibox10"),
+                                  infoBox(title = "Information",subtitle = "Please click the clear button!" ),
                                   actionButton("action_prediction", label = "Predict",
-                                                 style = "position: absolute;
-                                              top: 92%;
-                                              left: 91%;
+                                                 style = "#position: absolute;
+                                              #top: 92%;
+                                              #left: 91%;
                                               transform: translate(-50%, -50%);
                                               -ms-transform: translate(-50%, -50%);
                                               background-color: rgba(0, 191, 255);
@@ -318,9 +319,9 @@ ui <- dashboardPage(skin = "midnight",
                                                  
                                     ), 
                                   actionButton("clear_prediction", label = "Clear",
-                                               style = "position: absolute;
-                                              top: 92%;
-                                              left: 80%;
+                                               style = "#position: absolute;
+                                              #top: 92%;
+                                              #left: 77%;
                                               transform: translate(-50%, -50%);
                                               -ms-transform: translate(-50%, -50%);
                                               background-color: rgba(0, 191, 255);
@@ -447,7 +448,7 @@ ui <- dashboardPage(skin = "midnight",
                                     p("We are all students at Aalen University in the first semester of the part-time Master of Science. We have all completed our Bachelor of Science at the Cooperative State University Baden-Württemberg in Business Informatics."),
                                     box(title = h3("Leandra Sommer", align="center"), align="center", width = 4, img(class="img-circle", src="/images/lele.jpg", alt="", width = 200),
                                         br(""),
-                                        p("Data loving and collaborative leader that enjoys team-based environments dedicated to identifying and implementing business solutions that enable teams to deliver superior products, content and service to clients.")),
+                                        p("Works for CDA IT Systems as a test manager and project manager in the area of postal logistics. Has been studying for a master's degree in business informatics at Aalen University since September 2021.")),
                                     box(title = h3("Michele Candolfo", align="center"), align="center", width = 4, img(class="img-circle", src="/images/michele.JPG", alt="", width = 200),
                                         br(""),
                                         p("Data loving and collaborative leader that enjoys team-based environments dedicated to identifying and implementing business solutions that enable teams to deliver superior products, content and service to clients.")),
