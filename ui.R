@@ -99,10 +99,9 @@ ui <- dashboardPage(skin = "midnight",
                         # Second tab content
                         #-----------------------------------------------------------------
                         tabItem(tabName = "Dashboard",
-                                h2("Welcome to the dashboard"),
                                 
                                box(width = 12, 
-                                   title= "Facts - Click Me!",
+                                   title= p("Facts - Click Me!", style = "font-size:30px;"),
                                 
                                      flipBox(
                                        id = "myflipbox1",
@@ -214,7 +213,7 @@ ui <- dashboardPage(skin = "midnight",
                                      
                                    )
                                 ),
-                               box(title = "Overview ", 
+                               box(title = p("Overview", style = "font-size:30px;"), 
                                    width = 12, 
                                    selectInput("plotDashboard", label = h3("Please check a variable for the plot"), 
                                                choices = list("Waterfront" = "waterfront", "Renovated" = "renovated", "Year built" = "yearb"), 
@@ -230,7 +229,7 @@ ui <- dashboardPage(skin = "midnight",
                         #-----------------------------------------------------------------
                         tabItem(tabName = "Prediction",
 
-                                box(width = 3, title = h2("Enter values"),
+                                box(width = 3, title =p("Enter values", style = "font-size:30px;"),
                                   numericInput("sqm_liv", label = h3("Living space (in sqm)"), value = 0, min= 1), #sqm_live will be sent to the server
                                   selectizeInput("grade", label = h3("Building Grade"), 
                                               choices = list("1","2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"), #grade will be sent to the server
@@ -268,7 +267,7 @@ ui <- dashboardPage(skin = "midnight",
                             
                                 ),
                                 
-                                box(width = 9, title = h2("Prediction"),
+                                box(width = 9, title =p("Prediction", style = "font-size:30px;"),
                                   h3("Check your inputs:"),
                                   #Prediciton is generated from the server 
                                   infoBoxOutput("ibox0"),
@@ -317,7 +316,7 @@ ui <- dashboardPage(skin = "midnight",
 
                                 ),
                                 
-                                box(width = 9, title = h2("Result of the predicition in $"),
+                                box(width = 9, title = p("Result of the predicition in $", style = "font-size:30px;"),
                                     h3(uiOutput("value"))
                                 
                                     
@@ -329,7 +328,7 @@ ui <- dashboardPage(skin = "midnight",
                         tabItem(tabName = "Map",
                                 
 
-                                box(width = 3, title = h2("Enter values"), 
+                                box(width = 3, title =p("Enter values", style = "font-size:30px;"), 
                                     selectizeInput("grademap", label = h3("Building Grade"), 
                                                   choices = list("1","2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"), #grade will be sent to the server
                                                   multiple = TRUE,
@@ -380,7 +379,7 @@ ui <- dashboardPage(skin = "midnight",
                                 ),
                                 
                                 
-                                box(width = 9, title = h2("Welcome to the map"), 
+                                box(width = 9, title = p("Welcome to the map", style = "font-size:30px;"), 
                                   leafletOutput("int_map")
                                   
                                 )
