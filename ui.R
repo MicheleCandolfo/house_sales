@@ -317,9 +317,10 @@ ui <- dashboardPage(skin = "midnight",
                                 ),
                                 
                                 box(width = 9, title = p("Result of the predicition in $", style = "font-size:30px;"),
-                                    h3(uiOutput("value"))
-                                
-                                    
+                                    #h3(uiOutput("value")),
+                                    # display text output
+                                    h3(uiOutput("text"))
+                                  
                                 )
                         ),
                         #End of prediciton------------------------------------------------

@@ -267,10 +267,6 @@ server <- function(input, output, session) {
       })
     
    
-      
-     
-    
-  
     
   #Prediciton page info boxes---------------------------------------------------------
     observeEvent(input$action_prediction,{
@@ -302,12 +298,48 @@ server <- function(input, output, session) {
     
     })
     
+    #-----------------------------------------
     observeEvent(input$clear_prediction,{
-      output$value <- renderUI({ 
-      
-        0
+      output$text <- renderUI({ 
+        keks <- text_reactive()
+        keks <- 0
       })
     })
+    
+    #-----------------------------------------
+    text_reactive <- eventReactive( input$action_prediction, {
+      #------------------------
+      bedrooms <- input$bedrooms
+      bathrooms <- input$bathrooms
+      waterfront <- input$waterfront
+      condition <- input$condition
+      grade <- input$grade
+      sqm_living <- input$sqm_liv
+      basement <- input$basement
+      renovated <- input$renovated
+      zipcode<- input$zipCodePre
+      yearb <-input$yearb
+      floors <-input$floors
+      #------------------------
+      input_user <- data.frame(bedrooms, bathrooms, waterfront, condition, grade, sqm_living, basement, renovated, zipcode, yearb, floors )
+      #-------------------------
+      userPrediction <- predict(
+        model,
+        data = input_user,
+        predict.all = FALSE,
+        num.trees = model$num.trees,
+        type = "response",
+        se.method = "infjack",
+        verbose = TRUE,)
+      #------------------------
+      round(userPrediction$predictions)
+    })
+    
+    # text output
+    output$text <- renderText({
+      text_reactive()
+    })
+    #-----------------------------------------
     
     output$ibox0 <- renderInfoBox({
       infoBox(
