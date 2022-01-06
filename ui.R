@@ -28,12 +28,7 @@ ui <- dashboardPage(skin = "midnight",
                     #-----------------------------------------------------------------
                     dashboardBody( style = "border: none",
                                    useShinyjs(),
-                      
-                      tags$head(
-                      # Include the custom styling
-                      tags$link(rel = "stylesheet", type = "text/css", href = "style.css")
-                      ),
-                      # Add the pages
+                      # Add pages
                       #-----------------------------------------------------------------
                       tabItems(
                         # First tab content
@@ -44,21 +39,6 @@ ui <- dashboardPage(skin = "midnight",
                         img(src = "/images/house.jpg", 
                             style = "height: auto; width: 100%; border: none; border-radius: 5px", 
                         ),
-                       
-                        
-                        #actionButton('prediction', 'Prediction', onclick="location.href='Prediction';",
-                                     #style = "position: absolute;
-                                              #top: 48%;
-                                              #left: 50%;
-                                              #transform: translate(-50%, -50%);
-                                              #-ms-transform: translate(-50%, -50%);
-                                              #background-color: rgba(0, 191, 255,0.5);
-                                              #color: white;
-                                              #font-size: 16px;
-                                              #padding: 12px 24px;
-                                              #border: none;
-                                              #cursor: pointer;
-                                              #border-radius: 5px;"),
                         
                         div( h3("You like to know how much your real estate in King County is worth?"), 
                              h3("You are just one click away from a precise prediction based on AI!"),
