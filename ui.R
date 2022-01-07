@@ -319,7 +319,7 @@ ui <- dashboardPage(skin = "midnight",
                                 box(width = 9, title = p("Result of the predicition in $", style = "font-size:30px;"),
                                     #h3(uiOutput("value")),
                                     # display text output
-                                    h3(uiOutput("text"))
+                                    h3(textOutput("text"))
                                   
                                 )
                         ),
@@ -329,58 +329,34 @@ ui <- dashboardPage(skin = "midnight",
                         tabItem(tabName = "Map",
                                 
 
-                                box(width = 3, title =p("Enter values", style = "font-size:30px;"), 
-                                    selectizeInput("grademap", label = h3("Building Grade"), 
-                                                  choices = list("1","2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"), #grade will be sent to the server
-                                                  multiple = TRUE,
-                                                  selected = list("1","2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"),
-                                                   ),
-                                    tippy("Information about grade", tooltip = "Index from 1 to 13, with 1-3 representing poor construction and design, 7 representing average construction and design, and 11-13 representing high quality construction and design; You can find more information on the information page"),
-                                    hr(),
+                                box(width = 12, title =p("Enter values", style = "font-size:30px;"), 
+                                    actionButton("all", "ALL"),
+                                    actionButton("zipcodeMap", "ZIPCODE"),
+                                    
+                                    
+                                    #radioButtons("radioBTN", label = h3("Please choose something"),
+                                                # choices = list("All" = "ALL", "Zipcodes" = "Zipcodes"), 
+                                                 #selected = "ALL"),
                                     selectizeInput("zip", label = h3("Zipcode"), 
-                                                 choices= c("98178", "98125","98028", "98136", "98074", "98053", "98003", "98198", "98146", "98038", "98007", "98115", "98126", "98019", "98103", "98002", "98133", "98040", "98092",
-                                                            "98030", "98119", "98112", "98052", "98027", "98117", "98058", "98107", "98001", "98056", "98166", "98023", "98070", "98148", "98105", "98042", "98008", "98059", "98122",
-                                                            "98144", "98004", "98005", "98034", "98075", "98116","98010", "98118", "98199", "98032", "98045", "98102", "98077", "98108", "98168", "98177", "98065", "98029", "98006",
-                                                            "98109", "98022", "98033", "98155", "98024", "98011", "98031", "98106", "98072", "98188", "98014", "98055", "98039" ), 
-                                                multiple = TRUE,
-                                                selected = c("98178", "98125","98028", "98136", "98074", "98053", "98003", "98198", "98146", "98038", "98007", "98115", "98126", "98019", "98103", "98002", "98133", "98040", "98092",
-                                                             "98030", "98119", "98112", "98052", "98027", "98117", "98058", "98107", "98001", "98056", "98166", "98023", "98070", "98148", "98105", "98042", "98008", "98059", "98122",
-                                                             "98144", "98004", "98005", "98034", "98075", "98116","98010", "98118", "98199", "98032", "98045", "98102", "98077", "98108", "98168", "98177", "98065", "98029", "98006",
-                                                             "98109", "98022", "98033", "98155", "98024", "98011", "98031", "98106", "98072", "98188", "98014", "98055", "98039" ),
-                                                 ),
-                                  selectizeInput("yearbmap", label = h3("Year built"), #yearb will be sent to the server
-                                                choices = c("1900-1950","1950-2000", "2000-2021"), 
-                                                multiple = TRUE,
-                                                selected = c("1900-1950","1950-2000", "2000-2021")
-                                                ),
-                                  selectizeInput("conditionmap", label = h3("Building Condition"),#condition will be sent to the server
-                                                choices = c("1","2", "3", "4", "5"),
-                                                multiple = TRUE,
-                                                selected = c("1","2", "3", "4", "5"),
-                                                ),
-                                  tippy("Information about condition", tooltip = "1: Poor, 2: Fair, 3: Average, 4: Good, 5: Very good;
-                                        You can find more information on the information page"),
-                                  hr(),
-                                  selectInput("waterfrontmap", label = h3("Waterfront"), 
-                                              choices = list("Yes" = 1, "No" = 0), #Waterfront will be sent to the server
-                                              multiple = TRUE,
-                                              selected = list("Yes" = 1, "No" = 0)
-                                  ),
-                                  selectInput("basementmap", label = h3("Basement"),
-                                              choices = list("Yes" = 1, "No" = 0), #Basement will be sent to the server
-                                              multiple = TRUE,
-                                              selected = list("Yes" = 1, "No" = 0)
-                                              ),
-                                  selectInput("renovatedmap", label = h3("Renovated"), 
-                                              choices = list("Yes" = 1, "No" = 0), #Renovated will be sent to the server
-                                              multiple = TRUE,
-                                              selected = list("Yes" = 1, "No" = 0)
-                                              ),
-                                  hr()
+                                                   choices= c("98178", "98125","98028", "98136", "98074", "98053", "98003", "98198", "98146", "98038", "98007", "98115", "98126", "98019", "98103", "98002", "98133", "98040", "98092",
+                                                              "98030", "98119", "98112", "98052", "98027", "98117", "98058", "98107", "98001", "98056", "98166", "98023", "98070", "98148", "98105", "98042", "98008", "98059", "98122",
+                                                              "98144", "98004", "98005", "98034", "98075", "98116","98010", "98118", "98199", "98032", "98045", "98102", "98077", "98108", "98168", "98177", "98065", "98029", "98006",
+                                                              "98109", "98022", "98033", "98155", "98024", "98011", "98031", "98106", "98072", "98188", "98014", "98055", "98039" ), 
+                                                   multiple = TRUE
+                                                   
+                                    ), 
+                                    p("Please chosse a zipcode. It is possible to select multiple zip codes")
+                            
+                                  #selectInput("waterfrontmap", label = h3("Waterfront"), 
+                                   #           choices = list("ALL" = "ALL", "Yes" = 1, "No" = 0), #Waterfront will be sent to the server
+                                    #          multiple = FALSE, 
+                                     #         selected = "ALL"
+                                  #)
+                                  
                                 ),
                                 
                                 
-                                box(width = 9, title = p("Welcome to the map", style = "font-size:30px;"), 
+                                box(width = 12, title = p("Welcome to the map", style = "font-size:30px;"), 
                                   leafletOutput("int_map")
                                   
                                 )

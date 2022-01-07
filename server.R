@@ -17,6 +17,7 @@ install.load::install_load(c("shiny",
                              "lubridate", 
                              "ggdark"
                              
+                             
 ))
 
 
@@ -298,11 +299,14 @@ server <- function(input, output, session) {
     
     })
     
+    
     #-----------------------------------------
     observeEvent(input$clear_prediction,{
-      output$text <- renderUI({ 
-        keks <- text_reactive()
-        keks <- 0
+      output$text <- renderText({ 
+        #keks <- text_reactive()
+       # keks <- 0
+        0
+        
       })
     })
     
@@ -337,7 +341,7 @@ server <- function(input, output, session) {
     
     # text output
     output$text <- renderText({
-      text_reactive()
+        text_reactive()
     })
     #-----------------------------------------
     
@@ -431,19 +435,64 @@ server <- function(input, output, session) {
     #End of infoboxes-----------------------------------
     #View(house_prices3)
   
-
-    
-  
+    shinyjs::disable("zip" )
     output$int_map <- renderLeaflet({
-      data <- dplyr::select(house_prices4, price, lat, long, zipcode, waterfront, basement, renovated, grade, condition, yearb)
-      coordinates_data <- subset(data, data$zipcode == input$zip & data$waterfront == input$waterfrontmap)
-      #coordinates_data <- subset(data, data$zipcode == input$zip & data$waterfront == input$waterfrontmap & data$basement == input$basementmap & data$renovated == input$renovatedmap & data$grade == input$grademap & data$condition == input$conditionmap & data$yearb == input$yearbmap)
-      #coordinates_data <- subset(data, data$zipcode == input$zip)
+      data <- dplyr::select(house_prices4, price, lat, long, zipcode)
+      leaflet(data) %>% addTiles() %>% addMarkers(
+        clusterOptions = markerClusterOptions())
+    }) 
+  observeEvent(input$all, {
+    shinyjs::disable("zip")
+    output$int_map <- renderLeaflet({
+    data <- dplyr::select(house_prices4, price, lat, long, zipcode)
+      leaflet(data) %>% addTiles() %>% addMarkers(
+        clusterOptions = markerClusterOptions())
+    })
+    })
+  
+    observeEvent(input$zipcodeMap, {
+      shinyjs::enable("zip")
+      output$int_map <- renderLeaflet({
+        data <- dplyr::select(house_prices4, price, lat, long, zipcode)
+      coordinates_data <- subset(data, input$zip == data$zipcode) 
       pal = colorNumeric("Spectral", domain = coordinates_data$price)
       coordinates_data %>%
+        leaflet()%>%
+        addProviderTiles(providers$OpenStreetMap.Mapnik)%>%
+        addCircleMarkers(col = ~pal(price), opacity = 1.1, radius = 0.5) %>% 
+        addLegend(pal = pal, values = ~price)
+    })
+    })
+    #Wenn wir Radio BTNS verwenden wollen anstatt normale BTN
+    observeEvent(input$radioBTN,{
+      if (input$radioBTN == "ALL"){
+        shinyjs::disable("zip")
+        output$int_map <- renderLeaflet({
+          data <- dplyr::select(house_prices4, price, lat, long, zipcode)
+          leaflet(data) %>% addTiles() %>% addMarkers(
+            clusterOptions = markerClusterOptions())
+        })
+        
+      }else if (input$radioBTN =="Zipcodes"){
+        shinyjs::enable("zip")
+        output$int_map <- renderLeaflet({
+          data <- dplyr::select(house_prices4, price, lat, long, zipcode)
+          coordinates_data <- subset(data, input$zip == data$zipcode) 
+          pal = colorNumeric("Spectral", domain = coordinates_data$price)
+          coordinates_data %>%
             leaflet()%>%
             addProviderTiles(providers$OpenStreetMap.Mapnik)%>%
             addCircleMarkers(col = ~pal(price), opacity = 1.1, radius = 0.5) %>% 
             addLegend(pal = pal, values = ~price)
+        })
+      }
     })
+    
+  
+   
+    
+    
+    
+    
 }
+
