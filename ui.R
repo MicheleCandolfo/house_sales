@@ -345,7 +345,7 @@ ui <- dashboardPage(skin = "midnight",
                                                    multiple = TRUE
                                                    
                                     ), 
-                                    p("Please chosse a zipcode. It is possible to select multiple zip codes")
+                                    p("Please choose a zipcode. It is possible to select multiple zip codes")
                             
                                   #selectInput("waterfrontmap", label = h3("Waterfront"), 
                                    #           choices = list("ALL" = "ALL", "Yes" = 1, "No" = 0), #Waterfront will be sent to the server
@@ -425,7 +425,13 @@ ui <- dashboardPage(skin = "midnight",
                                     p("Do you want to find out at a glance what the house prices are like in individual regions in King County? Then our Map is the right place for you!"),
                                     p("Our About page describes our project, the data used and introduces our project team.")),
                                 box(title = "About the algorithm", width = 12, collapsible = TRUE, collapsed = TRUE,
-                                    p("For the price prediction we used the machine learning method Random Forest. We used training and test data for this. The performance of our prediction is around 83%. We evaluated the following variables as relevant for the prediction:")),
+                                    p("For the price prediction we used the machine learning method Random Forest."),
+                                    p("The random forest is a classification algorithm consisting of many decisions trees. It uses bagging and feature randomness when building each individual tree to try to create an uncorrelated forest of trees whose prediction by committee is more accurate than that of any individual tree"),
+                                    p("To implement the random forest method in our project we used the package 'ranger'. This package offers a fast implementation of random forests, particularly suited for high dimensional data. So this suites very seemless for our project and the performance is quite good."),
+                                    p("We splitted the dataset in training (80%) and test data (20%) for this."), 
+                                    p("The performance of our prediction is around 83%."), 
+                                    p("We evaluated the following variables as relevant for the prediction:"),
+                                    p("price, bedrooms, bathrooms, waterfront, condition, grade, sqm_living, basement, renovated, zipcode, yearb, floors")),
                                 box(title = "About data preparation", width = 12, collapsible = TRUE, collapsed = TRUE,
                                     p("Bedrooms records with zero values are removed. Record with the number of 33 bedrooms is adjusted to 3 bedrooms as we assume this is a typo."),
                                     p("Columns as factor"),
