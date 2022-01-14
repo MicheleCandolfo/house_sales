@@ -12,6 +12,7 @@ install.load::install_load(c("shiny",
                             ))
 
 ui <- dashboardPage(skin = "midnight",
+                   
                     dashboardHeader(title = tagList(
                       span(class = "logo-lg", "KC House Prices"), 
                       img(src = "/images/house_icon.png",
@@ -28,6 +29,9 @@ ui <- dashboardPage(skin = "midnight",
                     #-----------------------------------------------------------------
                     dashboardBody( style = "border: none",
                                    useShinyjs(),
+                                   includeCSS("www/style.css"),
+                                
+                                   
                       # Add pages
                       #-----------------------------------------------------------------
                       tabItems(
@@ -357,8 +361,10 @@ ui <- dashboardPage(skin = "midnight",
                                 
                                 
                                 box(width = 12, title = p("Welcome to the map", style = "font-size:30px;"), 
-                                  leafletOutput("int_map")
-                                  
+                                
+                                div(id= "marker-cluster",
+                                    leafletOutput("int_map")
+                                )
                                 )
                         ),
                         # Fifth tab content
