@@ -74,29 +74,8 @@ ui <- dashboardPage(skin = "midnight",
                                               border: none;
                                               cursor: pointer;
                                               border-radius: 5px;"
-                                        
                            )
-                           
-                           
-                           
                            ),
-                        #img(src = "/images/giphy.gif",
-                          #  style = "position: absolute;
-                                              #top: 16.5%;
-                                              #left: 10%;
-                                              #transform: translate(-50%, -50%);
-                                              #-ms-transform: translate(-50%, -50%);
-                                              #background-color: rgba(255, 255, 255,0.45);
-                                              #color: black;
-                                              #font-size: 16px;
-                                              #padding: 12px 24px;
-                                              #border: none;
-                                              #cursor: pointer;
-                                              #border-radius: 5px;
-                                              #height: 200px;
-                                              #width: 300px;                  "),
-                        
-                        
                       ),
                                 
                                 
@@ -105,7 +84,7 @@ ui <- dashboardPage(skin = "midnight",
                         tabItem(tabName = "Dashboard",
                                 
                                box(width = 12, 
-                                   title= p("Facts - Click Me!", style = "font-size:30px;"),
+                                   title= p("Facts - click me!", style = "font-size:30px;"),
                                 
                                      flipBox(
                                        id = "myflipbox1",
@@ -121,7 +100,7 @@ ui <- dashboardPage(skin = "midnight",
                                          class = "text-center",
                                          width= 4,
                                          h3(min(house_prices5$price)),
-                                         p("Lowest Price in $")
+                                         p("Lowest price in $")
                                        )
                                      
                                    ),
@@ -219,7 +198,7 @@ ui <- dashboardPage(skin = "midnight",
                                 ),
                                box(title = p("Overview", style = "font-size:30px;"), 
                                    width = 12, 
-                                   selectInput("plotDashboard", label = h3("Please check a variable for the plot"), 
+                                   selectInput("plotDashboard", label = h3("Please check a variable for the plot:"), 
                                                choices = list("Waterfront" = "waterfront", "Renovated" = "renovated", "Year built" = "yearb"), 
                                    ),
                                    plotOutput("plot1", click = "plot_click")
@@ -235,12 +214,12 @@ ui <- dashboardPage(skin = "midnight",
 
                                 box(width = 3, title =p("Enter values", style = "font-size:30px;"),
                                   numericInput("sqm_liv", label = h3("Living space (in sqm)"), value = 0, min= 1), #sqm_live will be sent to the server
-                                  selectizeInput("grade", label = h3("Building Grade"), 
+                                  selectizeInput("grade", label = h3("Building grade"), 
                                               choices = list("1","2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"), #grade will be sent to the server
                                               ),
                                   tippy("Information about grade", tooltip = "Index from 1 to 13, with 1-3 representing poor construction and design, 7 representing average construction and design, and 11-13 representing high quality construction and design; You can find more information on the information page"),
                                   numericInput("bathrooms", label = h3("Bathrooms"), value = 0.5, min= 0,5), #bathrooms will be sent to the server
-                                  selectizeInput("zipCodePre",label = h3("Zipcode"), #zipCodePre will be sent to the server
+                                  selectizeInput("zipCodePre",label = h3("ZIP Code"), #zipCodePre will be sent to the server
                                                  choices= c("98178", "98125","98028", "98136", "98074", "98053", "98003", "98198", "98146", "98038", "98007", "98115", "98126", "98019", "98103", "98002", "98133", "98040", "98092",
                                                             "98030", "98119", "98112", "98052", "98027", "98117", "98058", "98107", "98001", "98056", "98166", "98023", "98070", "98148", "98105", "98042", "98008", "98059", "98122",
                                                             "98144", "98004", "98005", "98034", "98075", "98116","98010", "98118", "98199", "98032", "98045", "98102", "98077", "98108", "98168", "98177", "98065", "98029", "98006",
@@ -249,10 +228,10 @@ ui <- dashboardPage(skin = "midnight",
                                   selectizeInput("yearb", label = h3("Year built"), #yearb will be sent to the server
                                               choices = c("1900-1950","1950-2000", "2000-2021")), 
                                   sliderInput("bedrooms", label = h3("Bedrooms"), min = 0, #bedrooms will be sent to the server
-                                              max = 20, value = 4),
+                                              max = 10, value = 4),
                                   sliderInput("floors", label = h3("Floors"), min = 0, #floors will be sent to the server
-                                              max = 5, value = 2),
-                                  selectizeInput("condition", label = h3("Building Condition"),#condition will be sent to the server
+                                              max = 4, value = 2),
+                                  selectizeInput("condition", label = h3("Building condition"),#condition will be sent to the server
                                                  choices = c("1","2", "3", "4", "5")),
                                   tippy("Information about condition", tooltip = "1: Poor, 2: Fair, 3: Average, 4: Good, 5: Very good;
                                         You can find more information on the information page"),
@@ -285,7 +264,7 @@ ui <- dashboardPage(skin = "midnight",
                                   infoBoxOutput("ibox8"),
                                   infoBoxOutput("ibox9"),
                                   infoBoxOutput("ibox10"),
-                                  infoBox(title = "Information",subtitle = "Please click the clear button!" ),
+                                  infoBox(title = "Information",subtitle = "Please click the clear button before making a new prediction!" ),
                                   actionButton("action_prediction", label = "Predict",
                                                  style = "position: relative;
                                               top: 92%;
@@ -334,14 +313,9 @@ ui <- dashboardPage(skin = "midnight",
                                 
 
                                 box(width = 12, title =p("Enter values", style = "font-size:30px;"), 
-                                    actionButton("all", "ALL"),
-                                    actionButton("zipcodeMap", "ZIPCODE"),
-                                    
-                                    
-                                    #radioButtons("radioBTN", label = h3("Please choose something"),
-                                                # choices = list("All" = "ALL", "Zipcodes" = "Zipcodes"), 
-                                                 #selected = "ALL"),
-                                    selectizeInput("zip", label = h3("Zipcode"), 
+                                    actionButton("all", "All"),
+                                    actionButton("zipcodeMap", "ZIP Code"),
+                                    selectizeInput("zip", label = h3("ZIP Code"), 
                                                    choices= c("98178", "98125","98028", "98136", "98074", "98053", "98003", "98198", "98146", "98038", "98007", "98115", "98126", "98019", "98103", "98002", "98133", "98040", "98092",
                                                               "98030", "98119", "98112", "98052", "98027", "98117", "98058", "98107", "98001", "98056", "98166", "98023", "98070", "98148", "98105", "98042", "98008", "98059", "98122",
                                                               "98144", "98004", "98005", "98034", "98075", "98116","98010", "98118", "98199", "98032", "98045", "98102", "98077", "98108", "98168", "98177", "98065", "98029", "98006",
@@ -349,14 +323,8 @@ ui <- dashboardPage(skin = "midnight",
                                                    multiple = TRUE
                                                    
                                     ), 
-                                    p("Please choose a zipcode. It is possible to select multiple zip codes")
-                            
-                                  #selectInput("waterfrontmap", label = h3("Waterfront"), 
-                                   #           choices = list("ALL" = "ALL", "Yes" = 1, "No" = 0), #Waterfront will be sent to the server
-                                    #          multiple = FALSE, 
-                                     #         selected = "ALL"
-                                  #)
-                                  
+                                    p("Please choose a ZIP Code. It is possible to select multiple ZIP Codes.")
+          
                                 ),
                                 
                                 
@@ -372,13 +340,16 @@ ui <- dashboardPage(skin = "midnight",
                         tabItem(tabName = "About",
                                 box(title = "About the project", width = 12, collapsible = TRUE, collapsed = TRUE,
                                     p("This project involves building a Shiny Web application in RStudio as part of a project work in the Master's programme at Aalen University."),
-                                    p("The Shiny Web Application is basically about house price estimation/prediction based on house sales in King County, USA. We will use the programming language R and a specific data set from Kaggle.com. We also will use a machine learning algorithm (Random Forest) for the predicition.")),
+                                    p("The Shiny Web Application is basically about house price estimation/prediction based on house sales in King County, USA."),
+                                    p("We will use the programming language R and a specific data set from Kaggle.com."),
+                                    p("We also will use a machine learning algorithm (Random Forest) for the predicition.")),
                                 box(title = "About the data set", width = 12, collapsible = TRUE, collapsed = TRUE,
                                     p("The dataset consists of house prices from King County an area in the US State of Washington, this data also covers Seattle. The dataset was obtained from Kaggle. This data was published/released under CC0: Public Domain. Unfortunately, the user has not indicated the source of the data."),
                                     p("The dataset consisted of 21 variables and 21613 observations."), 
                                     p("Due to the “Grade” variable which is based on a grading system specific to King County, it seems likely that the data originated from an official source. On the other hand, the existence of the “View” variable relates to the number of viewings the property received. This suggests that the data originated from a real estate agent/company."),
                                     p("In either case, there is no reason to call into question the general accuracy of the data because values such as prices, area etc. do not appear random. Nevertheless, some caution is appropriate before applying models trained on this data to more general cases."),
-                                    p("The dataset consisted of historic data of houses sold between May 2014 to May 2015.")),
+                                    p("The dataset consisted of historic data of houses sold between May 2014 to May 2015."),
+                                    p(a("https://www.kaggle.com/harlfoxem/housesalesprediction",href="https://www.kaggle.com/harlfoxem/housesalesprediction"))),
                                 box(title = "Column description", width = 12, collapsible = TRUE, collapsed = TRUE,
                                     p("id - Unique ID for each home sold"),
                                     p("date - Date of the home sale"),
@@ -390,17 +361,22 @@ ui <- dashboardPage(skin = "midnight",
                                     p("floors - Number of floors"),
                                     p("waterfront - A dummy variable for whether the apartment was overlooking the waterfront or not"),
                                     p("view - An index from 0 to 4 of how good the view of the property was"),
-                                    p("condition - An index from 1 to 5 on the condition of the apartment,"),
+                                    p("condition - An index from 1 to 5 on the condition of the apartment"),
                                     p("grade - An index from 1 to 13, where 1-3 falls short of building construction and design, 7 has an average level of construction and design, and 11-13 have a high quality level of construction and design"),
                                     p("sqft_above - The square footage of the interior housing space that is above ground level"),
                                     p("sqft_basement - The square footage of the interior housing space that is below ground level"),
                                     p("yr_built - The year the house was initially built"),
                                     p("yr_renovated - The year of the house's last renovation"),
-                                    p("zipcode - What zipcode area the house is in"),
+                                    p("ZIP Code - What ZIP Code area the house is in"),
                                     p("lat - Lattitude"),
                                     p("long - Longitude"),
                                     p("sqft_living15 - The square footage of interior housing living space for the nearest 15 neighbors"),
-                                    p("sqft_lot15 - The square footage of the land lots of the nearest 15 neighbors")),
+                                    p("sqft_lot15 - The square footage of the land lots of the nearest 15 neighbors"),
+                                    hr(), 
+                                    p("basement - Boolean Yes or No"),
+                                    p("renovated - Boolean Yes or No"),
+                                    p("yearb - Levles")),
+                              
                                 
                                 box(title = "Details about building grade and building condition", width = 12, collapsible = TRUE, collapsed = TRUE,
                                     p("Building grade"),
@@ -431,13 +407,23 @@ ui <- dashboardPage(skin = "midnight",
                                     p("Do you want to find out at a glance what the house prices are like in individual regions in King County? Then our Map is the right place for you!"),
                                     p("Our About page describes our project, the data used and introduces our project team.")),
                                 box(title = "About the algorithm", width = 12, collapsible = TRUE, collapsed = TRUE,
-                                    p("For the price prediction we used the machine learning method Random Forest."),
-                                    p("The random forest is a classification algorithm consisting of many decisions trees. It uses bagging and feature randomness when building each individual tree to try to create an uncorrelated forest of trees whose prediction by committee is more accurate than that of any individual tree"),
-                                    p("To implement the random forest method in our project we used the package 'ranger'. This package offers a fast implementation of random forests, particularly suited for high dimensional data. So this suites very seemless for our project and the performance is quite good."),
-                                    p("We splitted the dataset in training (80%) and test data (20%) for this."), 
-                                    p("The performance of our prediction is around 83%."), 
-                                    p("We evaluated the following variables as relevant for the prediction:"),
-                                    p("price, bedrooms, bathrooms, waterfront, condition, grade, sqm_living, basement, renovated, zipcode, yearb, floors")),
+                                    p("For the price prediction we used the Random Forest machine learning method."),
+                                    p("The Random Forest is a classification algorithm that consists of many decision trees."),
+                                    p("It uses bagging and random features in the creation of each tree to create an uncorrelated forest of trees whose prediction by committee is more accurate than that of a single tree."),
+                                    br(),
+                                    p("To implement the random forest method in our project, we used the package 'ranger'."), 
+                                    p("This package provides a fast implementation of random forests that is particularly suitable for high-dimensional data"), 
+                                    p("So it is very suitable for our project and the performance is quite good."),
+                                    br(),
+                                    p("First, we split the dataset into training (80%) and test (20%) data"),
+                                    p("With the training data, the model was trained with 500 ENdecision trees."),
+                                    p("This uses 10 variables that are randomly selected as candidates at each split."),
+                                    p("We then predicted the price of the houses from the test data set and compared the predicted values with the actual values."),
+                                    p("This allowed us to check whether our prediction succeeded."),
+                                    p("The performance of our prediction is about 83%."),
+                                    br(),
+                                    p("We evaluated the following variables as relevant to the prediction: price, bedrooms, bathrooms, waterfront, condition, class, square feet of living space, basement, renovated, zip code, yearb, floors.")),
+                                    
                                 box(title = "About data preparation", width = 12, collapsible = TRUE, collapsed = TRUE,
                                     p("Bedrooms records with zero values are removed. Record with the number of 33 bedrooms is adjusted to 3 bedrooms as we assume this is a typo."),
                                     p("Columns as factor"),
@@ -456,7 +442,7 @@ ui <- dashboardPage(skin = "midnight",
                                         p("Works for TestGilde GmbH as a technical lead for test automation. Has been studying for a master's degree in business informatics at Aalen University since September 2021. ")),
                                     box(title = h3("Patrick Kurz", align="center"), align="center",  width = 4, img(class="img-circle", src="/images/patrick.png", alt="", width = 200), 
                                         br(""),
-                                        p("The team's project manager with a professional background in the banking industry. Mainly works for Mercedes-Benz AG as a product owner for digital services. Has been studying for a Master's degree in Data Science & Business Analytics at Aalen University since September 2021."))
+                                        p("Works for Mercedes-Benz AG as a product owner for digital services. Has been studying for a Master's degree in Data Science & Business Analytics at Aalen University since September 2021."))
                                    
                                     
 

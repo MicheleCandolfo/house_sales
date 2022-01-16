@@ -50,8 +50,7 @@ server <- function(input, output, session) {
     house_prices3$waterfront <- as.factor(house_prices3$waterfront)
     house_prices3$grade <- as.factor(house_prices3$grade)
     house_prices3$condition <- as.factor(house_prices3$condition)
-    #house_prices3$zipcode <- as.factor(house_prices3$zipcode)
-  
+   
     #Hinzufügen von zwei Spalten (boolean) (basement und renovated)
     house_prices3$basement <- as.factor(ifelse(house_prices3$sqft_basement>0,1,0))
     house_prices3$renovated <- as.factor(ifelse(house_prices3$yr_renovated>0,1,0))
@@ -111,15 +110,15 @@ server <- function(input, output, session) {
       num.trees       = 500,
       mtry            = 10
     )
-    testTest <- predict(
-      model,
-      data = test,
-      predict.all = FALSE,
-      num.trees = model$num.trees,
-      type = "response",
-      se.method = "infjack",
-      verbose = TRUE,
-    )
+    #testTest <- predict(
+    #  model,
+    #  data = test,
+    #  predict.all = FALSE,
+    #  num.trees = model$num.trees,
+    #  type = "response",
+    #  se.method = "infjack",
+    #  verbose = TRUE,
+    #)
     
     #modelOutput<- data.frame(obs = test$price, pred = testTest$predictions)
    #print(modelOutput )
@@ -129,12 +128,6 @@ server <- function(input, output, session) {
     #write_yaml(model, "my_model.yml")
     #model
     
-    #-> Hier müssen dann die input values von den User hinzugefügt werden
-    #predict(model, data.frame(train_x = c(1, 2, 3)))
-    
-   
-    #print(input_user)
-    
     #predict=predict(model,test[,-1])
     #postResample(test$price,predict)
     
@@ -142,45 +135,31 @@ server <- function(input, output, session) {
     #varImpPlot(model,type=2)
     
     #End of modeling-----------------------------------------------------------------------------------------
-    
-    #Checking if the data is correct and displayed!
-    #View(house_prices5)
-    
-  
+ 
     #Action button on the landing page 
     #observeEvent(input$keks, {
      # open(tabItem="Prediction")
     #})
     
-
-  
-    #output$value <- renderPrint({ input$num }) sqm_living
-    #output$value <- renderPrint({ input$select }) grade
-    #output$value <- renderPrint({ input$bathrooms }) bathrooms
-    #output$value <- renderPrint({ input$select }) zipcode
-    #output$value <- renderPrint({ input$select }) yearb
-    #output$value <- renderPrint({ input$slider1 }) bedrooms
-    #output$value <- renderPrint({ input$slider1 }) floors
-    
     #Dashboard page value boxes--------------------------------------------------------
     
     output$vbox1 <- renderValueBox({
       valueBox(
-        "Lowest Price",
+        "Lowest price",
         ""
       )
     })
     
     output$vbox2 <- renderValueBox({
       valueBox(
-        "Mean Price",
+        "Mean price",
         ""
       )
     })
     
     output$vbox3 <- renderValueBox({
       valueBox(
-        "Highest Price",
+        "Highest price",
         ""
       )
     })
@@ -213,7 +192,7 @@ server <- function(input, output, session) {
     
     #Plot for dashboard
     waterfrontValues <- list(
-      '0'="No Waterfront",
+      '0'="No waterfront",
       '1'="Waterfront"
     )
     
@@ -340,7 +319,7 @@ server <- function(input, output, session) {
     
     output$ibox3 <- renderInfoBox({
       infoBox(
-        "Zip Code",
+        "ZIP Code",
         input$zipCodePre,
         icon = icon("map")
       )
@@ -402,8 +381,7 @@ server <- function(input, output, session) {
     })
     
     #End of infoboxes-----------------------------------
-    #View(house_prices3)
-  
+
     shinyjs::disable("zip" )
     output$int_map <- renderLeaflet({
       data <- dplyr::select(house_prices4, price, lat, long, zipcode)
@@ -442,7 +420,7 @@ server <- function(input, output, session) {
             clusterOptions = markerClusterOptions())
         })
         
-      }else if (input$radioBTN =="Zipcodes"){
+      }else if (input$radioBTN =="ZIP Codes"){
         shinyjs::enable("zip")
         output$int_map <- renderLeaflet({
           data <- dplyr::select(house_prices4, price, lat, long, zipcode)
