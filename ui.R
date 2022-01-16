@@ -30,22 +30,19 @@ ui <- dashboardPage(skin = "midnight",
                     dashboardBody( style = "border: none",
                                    useShinyjs(),
                                    includeCSS("www/style.css"),
-                                
-                                   
                       # Add pages
                       #-----------------------------------------------------------------
                       tabItems(
                         # First tab content
                         #-----------------------------------------------------------------
                         tabItem(tabName = "Home", style = "border: none",
-                                
-                        
+                              
                         img(src = "/images/house.jpg", 
                             style = "height: auto; width: 100%; border: none; border-radius: 5px", 
                         ),
                         
-                        div( h3("You like to know how much your real estate in King County is worth?"), 
-                             h3("You are just one click away from a precise prediction based on AI!"),
+                        div( h3("Do you want to know how much your King County real estate is worth based on AI?"), 
+                             h3("You are just one click away!"),
                              h3(" "),
                            style = "position: absolute;
                                               top: 18%;
@@ -60,13 +57,10 @@ ui <- dashboardPage(skin = "midnight",
                                               cursor: pointer;
                                               border-radius: 5px;
                                               width: 750px;
-                                              height: 200;",
+                                              height: 205px;
+                                              text-align: center;",
                            actionButton('switchtab', 'Prediction',
                                         style = "position: relative;
-                                              top: 29%;
-                                              left: 45%;
-                                              #transform: translate(-50%, -50%);
-                                              #-ms-transform: translate(-50%, -50%);
                                               background-color: rgba(0, 191, 255,0.7);
                                               color: white;
                                               font-size: 20px;
@@ -74,10 +68,9 @@ ui <- dashboardPage(skin = "midnight",
                                               border: none;
                                               cursor: pointer;
                                               border-radius: 5px;"
-                           )
+                              )
                            ),
                       ),
-                                
                                 
                         # Second tab content
                         #-----------------------------------------------------------------
@@ -205,7 +198,6 @@ ui <- dashboardPage(skin = "midnight",
                                  
                                ),
                                
-                               
                         ),
                         
                         # Third tab content
@@ -235,7 +227,7 @@ ui <- dashboardPage(skin = "midnight",
                                                  choices = c("1","2", "3", "4", "5")),
                                   tippy("Information about condition", tooltip = "1: Poor, 2: Fair, 3: Average, 4: Good, 5: Very good;
                                         You can find more information on the information page"),
-                                  hr(),
+                                  
                                   selectInput("waterfront", label = h3("Waterfront"), 
                                               choices = list("Yes" = 1, "No" = 0), #Waterfront will be sent to the server
                                   ),
@@ -244,15 +236,12 @@ ui <- dashboardPage(skin = "midnight",
                                   ),
                                   selectInput("renovated", label = h3("Renovated"), 
                                               choices = list("Yes" = 1, "No" = 0), #Renovated will be sent to the server
-                                  ),
-                                  hr()
-                                  
-                            
+                                  )
+                                
                                 ),
                                 
                                 box(width = 9, title =p("Prediction", style = "font-size:30px;"),
                                   h3("Check your inputs:"),
-                                  #Prediciton is generated from the server 
                                   infoBoxOutput("ibox0"),
                                   infoBoxOutput("ibox1"),
                                   infoBoxOutput("ibox2"),
@@ -295,23 +284,16 @@ ui <- dashboardPage(skin = "midnight",
                                               border-radius: 5px;"
                                                
                                   )
-                                  
 
                                 ),
                                 
                                 box(width = 9, title = p("Result of the predicition in $", style = "font-size:30px;"),
-                                    #h3(uiOutput("value")),
-                                    # display text output
                                     h3(textOutput("text"))
-                                  
                                 )
                         ),
-                        #End of prediciton------------------------------------------------
                         # Fourth tab content
                         #-----------------------------------------------------------------
                         tabItem(tabName = "Map",
-                                
-
                                 box(width = 12, title =p("Enter values", style = "font-size:30px;"), 
                                     actionButton("all", "All"),
                                     actionButton("zipcodeMap", "ZIP Code"),
@@ -327,12 +309,11 @@ ui <- dashboardPage(skin = "midnight",
           
                                 ),
                                 
-                                
                                 box(width = 12, title = p("Welcome to the map", style = "font-size:30px;"), 
                                 
                                 div(id= "marker-cluster",
                                     leafletOutput("int_map")
-                                )
+                                  )
                                 )
                         ),
                         # Fifth tab content
@@ -360,7 +341,7 @@ ui <- dashboardPage(skin = "midnight",
                                     p("sqft_lot - Square footage of the land space"),
                                     p("floors - Number of floors"),
                                     p("waterfront - A dummy variable for whether the apartment was overlooking the waterfront or not"),
-                                    p("view - An index from 0 to 4 of how good the view of the property was"),
+                                    p("view - An index from 0 to 4, which indicates how often the property was visited"),
                                     p("condition - An index from 1 to 5 on the condition of the apartment"),
                                     p("grade - An index from 1 to 13, where 1-3 falls short of building construction and design, 7 has an average level of construction and design, and 11-13 have a high quality level of construction and design"),
                                     p("sqft_above - The square footage of the interior housing space that is above ground level"),
@@ -377,7 +358,6 @@ ui <- dashboardPage(skin = "midnight",
                                     p("renovated - Boolean Yes or No"),
                                     p("yearb - Levles")),
                               
-                                
                                 box(title = "Details about building grade and building condition", width = 12, collapsible = TRUE, collapsed = TRUE,
                                     p("Building grade"),
                                     p("1-3: Falls short of minimum building standards. Normally cabin or inferior structure. "),
@@ -416,13 +396,13 @@ ui <- dashboardPage(skin = "midnight",
                                     p("So it is very suitable for our project and the performance is quite good."),
                                     br(),
                                     p("First, we split the dataset into training (80%) and test (20%) data"),
-                                    p("With the training data, the model was trained with 500 ENdecision trees."),
+                                    p("With the training data, the model was trained with 500 decision trees."),
                                     p("This uses 10 variables that are randomly selected as candidates at each split."),
                                     p("We then predicted the price of the houses from the test data set and compared the predicted values with the actual values."),
                                     p("This allowed us to check whether our prediction succeeded."),
                                     p("The performance of our prediction is about 83%."),
                                     br(),
-                                    p("We evaluated the following variables as relevant to the prediction: price, bedrooms, bathrooms, waterfront, condition, class, square feet of living space, basement, renovated, zip code, yearb, floors.")),
+                                    p("We evaluated the following variables as relevant to the prediction: price, bedrooms, bathrooms, waterfront, condition, class, square feet of living space, basement, renovated, zip code, yearb and floors.")),
                                     
                                 box(title = "About data preparation", width = 12, collapsible = TRUE, collapsed = TRUE,
                                     p("Bedrooms records with zero values are removed. Record with the number of 33 bedrooms is adjusted to 3 bedrooms as we assume this is a typo."),
@@ -445,11 +425,9 @@ ui <- dashboardPage(skin = "midnight",
                                         p("Works for Mercedes-Benz AG as a product owner for digital services. Has been studying for a Master's degree in Data Science & Business Analytics at Aalen University since September 2021."))
                                    
                                     
-
-
                                     ),
                       
                                 
-                      )
+                            )
                     )
 ))

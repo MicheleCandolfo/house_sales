@@ -17,11 +17,7 @@ install.load::install_load(c("shiny",
                              "lubridate", 
                              "ggdark"
                              
-                             
-))
-
-
-
+                          ))
 
 server <- function(input, output, session) {
     
@@ -34,28 +30,29 @@ server <- function(input, output, session) {
       updateTabItems(session, "tabs", newtab)
     })
     
-    #End button landingpage-------------------
+    # load data and data preparation-------------------
     
-    #Load the data 
+    # Load the data 
     house_prices <- read.csv("kc_house_data.csv")
   
-    #Data preparation 
-    # bedrooms DS mit Null-Werten rauswerfen und DS ändern 33 zu 3 Schlafzimmer
+    # Data preparation 
+    # Eliminate bedrooms data set with null values and change value 33 to 3 bedrooms
     house_prices2 <- house_prices
     house_prices2[house_prices2$id==2402100895, "bedrooms"] <- 3
     house_prices3<-house_prices2[!(house_prices2$bedrooms==0 | house_prices2$bathrooms==0),]
     
-    #Spalten As Factor
+    # Columns as factor
     house_prices3$floors <- as.factor(house_prices3$floors)
     house_prices3$waterfront <- as.factor(house_prices3$waterfront)
     house_prices3$grade <- as.factor(house_prices3$grade)
     house_prices3$condition <- as.factor(house_prices3$condition)
    
-    #Hinzufügen von zwei Spalten (boolean) (basement und renovated)
+    
+    # Adding of two columns (boolean) (basement and renovated)
     house_prices3$basement <- as.factor(ifelse(house_prices3$sqft_basement>0,1,0))
     house_prices3$renovated <- as.factor(ifelse(house_prices3$yr_renovated>0,1,0))
     
-    # Ausreisser entfernen 
+    # Eliminate outliers 
     house_prices4 = subset(house_prices3,!(house_prices3$price > 6000000))
     house_prices4 = subset(house_prices4,!(house_prices4$sqft_living > 10000))
     
@@ -73,10 +70,10 @@ server <- function(input, output, session) {
     
     house_prices4$sqm_basement <- round(house_prices4$sqft_basement *qm)
     
-    #drop sqft columns
+    # Drop sqft columns
     house_prices4[,c("sqft_living","sqft_lot","sqft_above","sqft_basement","sqft_lot15","sqft_living15")] <- list(NULL)
     
-    #Feature tuning 
+    # Feature tuning 
     house_prices4$yearb<-cut(house_prices4$yr_built,c(1900,1950,2000,2020))
     house_prices4$yearb<-factor(house_prices4$yearb,levels = c("(1.9e+03,1.95e+03]","(1.95e+03,2e+03]","(2e+03,2.02e+03]"),labels = c("1900-1950","1950-2000","2000-2020"))
     house_prices4<-house_prices4 %>% filter(!is.na(yearb))
@@ -90,10 +87,7 @@ server <- function(input, output, session) {
       separate(Date,c("Year","Month","Day"))
     
     
-    #End of data preparation--------------------------------------------------------------------------------
-    
-    #Start of modeling 
-    
+    ##Start of modeling--------------------------------------------------------------------------------
     
     #Choosing features
     house_prices5=house_prices4[,c("price","bedrooms","bathrooms","waterfront","condition","grade", "sqm_living", "basement","renovated", "zipcode", "yearb", "floors")]
@@ -121,25 +115,10 @@ server <- function(input, output, session) {
     #)
     
     #modelOutput<- data.frame(obs = test$price, pred = testTest$predictions)
-   #print(modelOutput )
-    #Train the model 
-    
-    #model=randomForest(price~.,train)
-    #write_yaml(model, "my_model.yml")
-    #model
-    
-    #predict=predict(model,test[,-1])
-    #postResample(test$price,predict)
+    #print(modelOutput )
     
     #importance(model)
     #varImpPlot(model,type=2)
-    
-    #End of modeling-----------------------------------------------------------------------------------------
- 
-    #Action button on the landing page 
-    #observeEvent(input$keks, {
-     # open(tabItem="Prediction")
-    #})
     
     #Dashboard page value boxes--------------------------------------------------------
     
@@ -196,7 +175,6 @@ server <- function(input, output, session) {
       '1'="Waterfront"
     )
     
-      
       waterfront_labeller <- function(variable,value){
         return(waterfrontValues[value])
       }
@@ -210,7 +188,6 @@ server <- function(input, output, session) {
         return(renovatedValues[value])
       }
 
-  
     output$plot1 <- renderPlot({
       if (input$plotDashboard == "waterfront") {
         house_prices4 %>%
@@ -220,7 +197,6 @@ server <- function(input, output, session) {
           scale_y_continuous(labels = scales::dollar)+
           xlab("Living space in square meter")+
           ylab("Price")+
-          # theme_classic()+
           dark_theme_gray(base_size = 18)+
           theme(legend.position="none", strip.text.x = element_text(size = 16))
       } else if (input$plotDashboard == "renovated") {
@@ -245,8 +221,6 @@ server <- function(input, output, session) {
           theme(legend.position="none", strip.text.x = element_text(size = 16))
       }
       })
-    
-   
     
   #Prediciton page info boxes---------------------------------------------------------
     
@@ -286,7 +260,7 @@ server <- function(input, output, session) {
       v$data <- round(userPrediction$predictions)
     })
     
-    # text output
+    # Text output
     output$text <- renderText({
       if (is.null(v$data)) return()
       v$data
@@ -380,7 +354,7 @@ server <- function(input, output, session) {
       )
     })
     
-    #End of infoboxes-----------------------------------
+    #Start of map-----------------------------------
 
     shinyjs::disable("zip" )
     output$int_map <- renderLeaflet({
@@ -410,36 +384,6 @@ server <- function(input, output, session) {
         addLegend(pal = pal, values = ~price)
     })
     })
-    #Wenn wir Radio BTNS verwenden wollen anstatt normale BTN
-    observeEvent(input$radioBTN,{
-      if (input$radioBTN == "ALL"){
-        shinyjs::disable("zip")
-        output$int_map <- renderLeaflet({
-          data <- dplyr::select(house_prices4, price, lat, long, zipcode)
-          leaflet(data) %>% addTiles() %>% addMarkers(
-            clusterOptions = markerClusterOptions())
-        })
-        
-      }else if (input$radioBTN =="ZIP Codes"){
-        shinyjs::enable("zip")
-        output$int_map <- renderLeaflet({
-          data <- dplyr::select(house_prices4, price, lat, long, zipcode)
-          coordinates_data <- subset(data, input$zip == data$zipcode) 
-          pal = colorNumeric("Spectral", domain = coordinates_data$price)
-          coordinates_data %>%
-            leaflet()%>%
-            addProviderTiles(providers$OpenStreetMap.Mapnik)%>%
-            addCircleMarkers(col = ~pal(price), opacity = 1.1, radius = 0.5) %>% 
-            addLegend(pal = pal, values = ~price)
-        })
-      }
-    })
-    
-  
-   
-    
-    
-    
     
 }
 
