@@ -9,7 +9,6 @@ install.load::install_load(c("shiny",
                              "shinydashboard",
                              "shinydashboardPlus", 
                              "shinyjs",
-                             "randomForest",
                              "caret",
                              "caTools", 
                              "yaml", 
@@ -78,13 +77,7 @@ server <- function(input, output, session) {
     house_prices4$yearb<-factor(house_prices4$yearb,levels = c("(1.9e+03,1.95e+03]","(1.95e+03,2e+03]","(2e+03,2.02e+03]"),labels = c("1900-1950","1950-2000","2000-2020"))
     house_prices4<-house_prices4 %>% filter(!is.na(yearb))
 
-    house_prices4<-house_prices4 %>% 
-      mutate(id=as.factor(id)) %>% 
-      mutate(Date=str_replace_all(house_prices4$date,"T0{1,}","")) %>% 
-      select(Date,everything(),-date,-id)
-    house_prices4<-house_prices4 %>% 
-      mutate(Date=ymd(Date)) %>% 
-      separate(Date,c("Year","Month","Day"))
+   
     
     
     ##Start of modeling--------------------------------------------------------------------------------
