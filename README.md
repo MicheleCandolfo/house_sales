@@ -1,4 +1,41 @@
-# Shiny App Project
-## Project for Business Analytics class 
 
-In this repo you will find our Shiny App project. This project is basically about house price estimation/prediction based on house sales in King County, USA. We will use the programming language R and a specific data set from Kaggle.com. We also will use a ML algo for the predicition. 
+# House Price Prediction 
+
+Shiny App that predicts the house prices in King County, USA. 
+
+
+## Project Stack
+
+**Programming Language:** R & Shiny
+
+**Data:** House sales in King County (Kaggle.com)
+
+**Machine Learning Algorithm:** Random Forest
+
+
+
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/MicheleCandolfo/house_sales.git
+```
+
+Go to the project directory
+
+```bash
+  cd house_sales
+```
+
+Install dependencies
+
+```bash
+  open ui.R
+```
+
+Start the App by running the ui.R in RStudio 
+
+
+
